@@ -1,0 +1,250 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+import { ArrowRight } from "lucide-react";
+import { MaxlabsLogo } from "@/components/brand/MaxlabsLogo";
+import { MaxlabsWordmark } from "@/components/brand/MaxlabsWordmark";
+import { DeliveryProcessSection } from "./delivery-process-section";
+import { FeatureStoryCard } from "./feature-story-card";
+import { HeroLoopBackground } from "./hero-loop-background";
+import { HeroVisualShowcase } from "./hero-visual-showcase";
+import { LandingHashSync } from "./landing-hash-sync";
+import { LandingNavMenu } from "./landing-nav-menu";
+import { AboutSection } from "./about-section";
+import { ProjectsSection } from "./projects-section";
+import { ValuesMarqueeSection } from "./values-marquee-section";
+import { CONTACT_EMAIL, CONTACT_PHONES, TAX_CLASSIFICATION } from "@/lib/contact-info";
+
+export const metadata: Metadata = {
+  title: "MAXLABS I.T SOLUTIONS",
+  description:
+    "MAXLABS I.T. SOLUTIONS helps organizations maximize performance through practical digitalization, workflow automation, and scalable software implementation.",
+};
+
+function SectionHeading({ title, subtitle }: { title: string; subtitle: string }) {
+  return (
+    <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
+      <h2
+        className="mb-3 font-display text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl"
+      >
+        {title}
+      </h2>
+      <p className="text-sm leading-relaxed text-[var(--muted)] sm:text-base">{subtitle}</p>
+    </div>
+  );
+}
+
+function ContactDetails() {
+  return (
+    <div className="space-y-1 text-sm text-[#cbd5e1]">
+      <p>Phone:</p>
+      <ul className="list-disc space-y-0.5 pl-5">
+        {CONTACT_PHONES.map((phone) => (
+          <li key={phone}>{phone}</li>
+        ))}
+      </ul>
+      <p>Email: {CONTACT_EMAIL}</p>
+      <p>Tax Classification: {TAX_CLASSIFICATION}</p>
+    </div>
+  );
+}
+
+export default function LandingPage() {
+  return (
+    <div className="flex min-h-screen flex-col bg-white font-sans">
+      <LandingHashSync />
+
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--border)] bg-white">
+        <nav className="mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto] items-center gap-3 px-4 sm:h-16 sm:px-6 lg:grid-cols-[1fr_auto_1fr] lg:px-10">
+          <Link href="/" className="flex min-w-0 items-center gap-2" aria-label="MAXLABS home">
+            <MaxlabsLogo variant="mark" maxHeight={34} priority />
+            <MaxlabsWordmark textClassName="text-lg sm:text-xl" />
+          </Link>
+
+          <LandingNavMenu className="justify-self-end lg:justify-self-center" />
+
+          <div className="hidden justify-self-end lg:block">
+            <Link
+              href="/contact"
+              className="inline-flex h-10 items-center justify-center rounded-lg bg-[var(--primary)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--primary-hover)]"
+            >
+              Start Your Project
+            </Link>
+          </div>
+        </nav>
+      </header>
+
+      <div className="h-14 shrink-0 sm:h-16" aria-hidden="true" />
+
+      <main>
+        <section
+          className="relative isolate flex min-h-[calc(100svh-3.5rem)] flex-col overflow-hidden sm:min-h-[calc(100svh-4rem)]"
+          aria-label="Hero"
+        >
+          <HeroLoopBackground />
+
+          <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-4 py-14 sm:px-6 lg:grid lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-10 lg:px-10 xl:gap-14">
+            <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+              <p className="mb-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium tracking-wide text-white/90 sm:text-sm">
+                MAXLABS I.T. SOLUTIONS
+              </p>
+              <h1
+                className="font-display text-balance text-4xl font-extrabold leading-tight text-white sm:text-5xl md:text-6xl"
+              >
+                Maximize Your Business In
+                <span className="mt-2 block text-[#38bdf8] landing-text-rotate" aria-live="polite">
+                  <span>Business Digitalization</span>
+                  <span>Workflow Automation</span>
+                  <span>Custom ERP/CRM Systems</span>
+                  <span>Operational Visibility</span>
+                  <span>Scalable Architecture</span>
+                  <span>Practical Innovation</span>
+                </span>
+              </h1>
+              <p className="mt-6 max-w-3xl text-sm leading-relaxed text-slate-200 sm:text-base md:text-lg">
+                We design and implement practical software systems that simplify operations,
+                reduce manual overhead, and improve decision speed for SMEs and growth-stage teams.
+              </p>
+
+              <div className="mt-8 flex w-full max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row lg:justify-start">
+                <Link
+                  href="/contact"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[var(--primary)] px-6 text-sm font-semibold text-white transition-colors hover:bg-[var(--primary-hover)]"
+                >
+                  Request a Consultation
+                </Link>
+                <a
+                  href="#services"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-white/50 bg-white/10 px-6 text-sm font-semibold text-white transition-colors hover:bg-white/20"
+                >
+                  Explore Services
+                </a>
+              </div>
+            </div>
+
+            <HeroVisualShowcase className="mt-10 w-full lg:mt-0" />
+          </div>
+
+          <div className="relative z-10 border-t border-white/10 bg-black/25 py-4 backdrop-blur-sm sm:py-6">
+            <div className="mx-auto grid max-w-6xl grid-cols-3 gap-2 px-4 sm:px-6 lg:px-10">
+              {[
+                ["7", "Service Areas"],
+                ["5", "Delivery Stages"],
+                ["PH", "SME Focus"],
+              ].map(([value, label]) => (
+                <div key={label} className="text-center">
+                  <p className="text-xl font-bold text-white sm:text-2xl">{value}</p>
+                  <p className="text-xs text-slate-200 sm:text-sm">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <AboutSection />
+
+        <section
+          id="services"
+          className="scroll-mt-[5.5rem] border-t border-[var(--border)] bg-[var(--surface)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10"
+        >
+          <div className="mx-auto max-w-6xl">
+            <SectionHeading
+              title="Services and Capabilities"
+              subtitle="Modular services that can be delivered end-to-end or phased based on business priorities."
+            />
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <FeatureStoryCard
+                icon="consulting"
+                title="Business Digitalization Consulting"
+                description="Workflow assessment, bottleneck analysis, and practical digital transition planning."
+              />
+              <FeatureStoryCard
+                icon="automation"
+                title="Workflow Automation"
+                description="Automated approvals, task routing, and notifications to remove repetitive overhead."
+              />
+              <FeatureStoryCard
+                icon="customApp"
+                title="Custom Web Application Development"
+                description="Tailored systems for operations, administration, and service delivery needs."
+              />
+              <FeatureStoryCard
+                icon="crmErp"
+                title="CRM/ERP and Internal Systems"
+                description="Role-based business modules for records, transactions, and accountable workflows."
+              />
+              <FeatureStoryCard
+                icon="analytics"
+                title="Dashboards and Reporting"
+                description="Decision-ready visibility across key functions through practical data views."
+              />
+              <FeatureStoryCard
+                icon="cloud"
+                title="Cloud and Integration Services"
+                description="Cloud-ready architecture with API and third-party integration support."
+              />
+            </div>
+          </div>
+        </section>
+
+        <ValuesMarqueeSection />
+
+        <ProjectsSection />
+
+        <DeliveryProcessSection />
+
+        <section className="border-t border-[var(--border)] bg-white px-4 py-14 sm:px-6 lg:px-10">
+          <div className="mx-auto max-w-4xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 text-center">
+            <h2
+              className="mb-3 font-display text-3xl font-bold text-[var(--foreground)]"
+            >
+              Let us maximize your business through digitalization, automation, and technology.
+            </h2>
+            <p className="mb-6 text-sm text-[var(--muted)] sm:text-base">
+              Start with a practical consultation focused on your current workflows and target outcomes.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[var(--primary)] px-6 text-sm font-semibold text-white transition-colors hover:bg-[var(--primary-hover)]"
+            >
+              Talk to MAXLABS
+              <ArrowRight className="ml-2 size-4" aria-hidden="true" />
+            </Link>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-[#1e293b] bg-[var(--footer)] px-4 py-8 sm:px-6 lg:px-10">
+        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
+          <div>
+            <div className="mb-3 flex items-center gap-2">
+              <MaxlabsLogo maxHeight={32} />
+              <span className="text-sm font-semibold text-white">MAXLABS I.T. SOLUTIONS</span>
+            </div>
+            <p className="text-sm text-[#cbd5e1]">
+              Digitalization. Automation. Scalable Growth.
+            </p>
+          </div>
+          <div>
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-white">Quick Links</h3>
+            <ul className="space-y-2 text-sm text-[#cbd5e1]">
+              <li><a href="#about" className="hover:text-white">About</a></li>
+              <li><a href="#services" className="hover:text-white">Services</a></li>
+              <li><a href="#projects" className="hover:text-white">Projects</a></li>
+              <li><a href="#process" className="hover:text-white">Process</a></li>
+              <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-white">
+              Business Information
+            </h3>
+            <ContactDetails />
+          </div>
+        </div>
+        <div className="mx-auto mt-8 max-w-6xl border-t border-white/10 pt-4 text-xs text-[#94a3b8]">
+          © {new Date().getFullYear()} MAXLABS I.T. SOLUTIONS. All rights reserved.
+        </div>
+      </footer>
+    </div>
+  );
+}

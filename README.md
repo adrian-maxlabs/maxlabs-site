@@ -37,20 +37,42 @@ npm run dev
 
 ## Supabase Setup
 
-1. Create a new Supabase project for MAXLABS.
-2. Add runtime values:
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-3. Add migration script values:
-   - `SUPABASE_PROJECT_REF`
-   - `SUPABASE_ACCESS_TOKEN`
-4. Apply schema migration:
+Connected project: **maxlabs-site** (`fuakhjulyymydgrcbfii`, `ap-southeast-1`). This is separate from other apps (e.g. De Gala uses a different project ref).
+
+1. Copy `.env.local.example` → `.env.local` and set:
+   - `NEXT_PUBLIC_SUPABASE_URL` — `https://fuakhjulyymydgrcbfii.supabase.co`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` — anon key from [Supabase dashboard](https://supabase.com/dashboard/project/fuakhjulyymydgrcbfii/settings/api)
+   - `SUPABASE_PROJECT_REF` — `fuakhjulyymydgrcbfii`
+   - `SUPABASE_ACCESS_TOKEN` — personal token from [Account tokens](https://supabase.com/dashboard/account/tokens)
+2. Apply schema (only targets `SUPABASE_PROJECT_REF`):
 
 ```bash
 npm run migrate
 ```
 
-This creates `public.contact_inquiries` and its RLS insert policy for public submissions.
+This creates `public.contact_inquiries`, RLS insert policy, and table grants for `anon` / `authenticated`.
+
+## Inquiry Email Notifications
+
+Submissions are stored in Supabase and, when SMTP is configured, emailed to `maxlabs.systems@gmail.com` via [Nodemailer](https://nodemailer.com/) (MIT, open source).
+
+### Gmail SMTP setup (free)
+
+1. Sign in to the `maxlabs.systems@gmail.com` Google account.
+2. Enable 2-Step Verification on the account.
+3. Create an **App Password** (Google Account → Security → App passwords).
+4. Add these to `.env.local` (and Vercel project env vars for production):
+
+```bash
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=maxlabs.systems@gmail.com
+SMTP_PASS=<16-character-app-password>
+SMTP_FROM="MAXLABS Inquiries" <maxlabs.systems@gmail.com>
+INQUIRY_NOTIFICATION_EMAIL=maxlabs.systems@gmail.com
+```
+
+Each notification sets `Reply-To` to the visitor's email so you can respond directly from Gmail.
 
 ## Scripts
 
