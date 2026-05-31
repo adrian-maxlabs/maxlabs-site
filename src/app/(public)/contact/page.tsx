@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, Shield } from "lucide-react";
-import { MaxlabsLogo } from "@/components/brand/MaxlabsLogo";
+import { MaxlabsBrandLockup } from "@/components/brand/MaxlabsBrandLockup";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ContactInquiryForm } from "@/features/inquiries/components/ContactInquiryForm";
 import { CONTACT_EMAIL, CONTACT_PHONES, phoneToTelHref } from "@/lib/contact-info";
 
@@ -23,9 +24,8 @@ export default function ContactPage() {
     <div className="flex min-h-screen flex-col bg-white font-sans">
       <header className="border-b border-[#e2e8f0] bg-white">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:h-16 sm:px-6 lg:px-10">
-          <Link href="/" aria-label="Back to MAXLABS home" className="flex items-center gap-2">
-            <MaxlabsLogo variant="mark" maxHeight={32} priority />
-            <span className="hidden text-sm font-semibold text-[#0f172a] sm:block">MAXLABS</span>
+          <Link href="/" aria-label="Back to MAXLABS home" className="flex min-w-0 items-center gap-2">
+            <MaxlabsBrandLockup priority />
           </Link>
           <p className="text-sm text-[#64748b]">Initial Consultation</p>
         </div>
@@ -101,9 +101,7 @@ export default function ContactPage() {
         </div>
       </main>
 
-      <footer className="border-t border-[#e2e8f0] bg-[#0f172a] py-5 text-center text-sm text-[#cbd5e1]">
-        © {new Date().getFullYear()} MAXLABS I.T. SOLUTIONS
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

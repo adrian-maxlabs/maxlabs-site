@@ -1,18 +1,18 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
-import { MaxlabsLogo } from "@/components/brand/MaxlabsLogo";
-import { MaxlabsWordmark } from "@/components/brand/MaxlabsWordmark";
+import { MaxlabsBrandLockup } from "@/components/brand/MaxlabsBrandLockup";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { DeliveryProcessSection } from "./delivery-process-section";
 import { FeatureStoryCard } from "./feature-story-card";
 import { HeroLoopBackground } from "./hero-loop-background";
+import { HeroTrustBar } from "./hero-trust-bar";
 import { HeroVisualShowcase } from "./hero-visual-showcase";
 import { LandingHashSync } from "./landing-hash-sync";
 import { LandingNavMenu } from "./landing-nav-menu";
 import { AboutSection } from "./about-section";
 import { ProjectsSection } from "./projects-section";
 import { ValuesMarqueeSection } from "./values-marquee-section";
-import { CONTACT_EMAIL, CONTACT_PHONES, TAX_CLASSIFICATION } from "@/lib/contact-info";
 
 export const metadata: Metadata = {
   title: "MAXLABS I.T SOLUTIONS",
@@ -33,21 +33,6 @@ function SectionHeading({ title, subtitle }: { title: string; subtitle: string }
   );
 }
 
-function ContactDetails() {
-  return (
-    <div className="space-y-1 text-sm text-[#cbd5e1]">
-      <p>Phone:</p>
-      <ul className="list-disc space-y-0.5 pl-5">
-        {CONTACT_PHONES.map((phone) => (
-          <li key={phone}>{phone}</li>
-        ))}
-      </ul>
-      <p>Email: {CONTACT_EMAIL}</p>
-      <p>Tax Classification: {TAX_CLASSIFICATION}</p>
-    </div>
-  );
-}
-
 export default function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col bg-white font-sans">
@@ -56,8 +41,7 @@ export default function LandingPage() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--border)] bg-white">
         <nav className="mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto] items-center gap-3 px-4 sm:h-16 sm:px-6 lg:grid-cols-[1fr_auto_1fr] lg:px-10">
           <Link href="/" className="flex min-w-0 items-center gap-2" aria-label="MAXLABS home">
-            <MaxlabsLogo variant="mark" maxHeight={34} priority />
-            <MaxlabsWordmark textClassName="text-lg sm:text-xl" />
+            <MaxlabsBrandLockup priority />
           </Link>
 
           <LandingNavMenu className="justify-self-end lg:justify-self-center" />
@@ -124,20 +108,7 @@ export default function LandingPage() {
             <HeroVisualShowcase className="mt-10 w-full lg:mt-0" />
           </div>
 
-          <div className="relative z-10 border-t border-white/10 bg-black/25 py-4 backdrop-blur-sm sm:py-6">
-            <div className="mx-auto grid max-w-6xl grid-cols-3 gap-2 px-4 sm:px-6 lg:px-10">
-              {[
-                ["7", "Service Areas"],
-                ["5", "Delivery Stages"],
-                ["PH", "SME Focus"],
-              ].map(([value, label]) => (
-                <div key={label} className="text-center">
-                  <p className="text-xl font-bold text-white sm:text-2xl">{value}</p>
-                  <p className="text-xs text-slate-200 sm:text-sm">{label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <HeroTrustBar />
         </section>
 
         <AboutSection />
@@ -153,9 +124,9 @@ export default function LandingPage() {
             />
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               <FeatureStoryCard
-                icon="consulting"
-                title="Business Digitalization Consulting"
-                description="Workflow assessment, bottleneck analysis, and practical digital transition planning."
+                icon="customApp"
+                title="Custom Web Application Development"
+                description="Tailored systems for operations, administration, and service delivery needs."
               />
               <FeatureStoryCard
                 icon="automation"
@@ -163,9 +134,9 @@ export default function LandingPage() {
                 description="Automated approvals, task routing, and notifications to remove repetitive overhead."
               />
               <FeatureStoryCard
-                icon="customApp"
-                title="Custom Web Application Development"
-                description="Tailored systems for operations, administration, and service delivery needs."
+                icon="consulting"
+                title="Business Digitalization Consulting"
+                description="Workflow assessment, bottleneck analysis, and practical digital transition planning."
               />
               <FeatureStoryCard
                 icon="crmErp"
@@ -213,38 +184,7 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer className="border-t border-[#1e293b] bg-[var(--footer)] px-4 py-8 sm:px-6 lg:px-10">
-        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
-          <div>
-            <div className="mb-3 flex items-center gap-2">
-              <MaxlabsLogo maxHeight={32} />
-              <span className="text-sm font-semibold text-white">MAXLABS I.T. SOLUTIONS</span>
-            </div>
-            <p className="text-sm text-[#cbd5e1]">
-              Digitalization. Automation. Scalable Growth.
-            </p>
-          </div>
-          <div>
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-white">Quick Links</h3>
-            <ul className="space-y-2 text-sm text-[#cbd5e1]">
-              <li><a href="#about" className="hover:text-white">About</a></li>
-              <li><a href="#services" className="hover:text-white">Services</a></li>
-              <li><a href="#projects" className="hover:text-white">Projects</a></li>
-              <li><a href="#process" className="hover:text-white">Process</a></li>
-              <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-white">
-              Business Information
-            </h3>
-            <ContactDetails />
-          </div>
-        </div>
-        <div className="mx-auto mt-8 max-w-6xl border-t border-white/10 pt-4 text-xs text-[#94a3b8]">
-          © {new Date().getFullYear()} MAXLABS I.T. SOLUTIONS. All rights reserved.
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
