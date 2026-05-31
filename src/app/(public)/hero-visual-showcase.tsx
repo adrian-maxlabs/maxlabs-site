@@ -110,16 +110,6 @@ function PostGoLiveChart() {
         strokeDasharray="3 3"
         opacity="0.5"
       />
-      <text
-        x="85"
-        y="118"
-        textAnchor="middle"
-        fill="#94a3b8"
-        fontSize="7"
-        fontFamily="system-ui, sans-serif"
-      >
-        Go-live
-      </text>
       {[
         [160, 58],
         [240, 24],
@@ -302,8 +292,14 @@ export function HeroVisualShowcase({ className }: HeroVisualShowcaseProps) {
               <ArrowUpRight className="size-3" aria-hidden="true" />
             </span>
           </div>
-          <div className="h-16 sm:h-20">
+          <div className="relative h-16 sm:h-20">
             <PostGoLiveChart />
+            <span
+              className="absolute bottom-0 left-[30.357%] -translate-x-1/2 whitespace-nowrap text-[0.625rem] font-medium tracking-normal text-slate-400 sm:text-[0.6875rem]"
+              aria-hidden="true"
+            >
+              Go-live
+            </span>
           </div>
         </div>
 
