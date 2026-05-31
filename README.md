@@ -54,9 +54,27 @@ This creates `public.contact_inquiries`, RLS insert policy, and table grants for
 
 ## Inquiry Email Notifications
 
-Submissions are stored in Supabase and, when SMTP is configured, emailed to `maxlabs.systems@gmail.com` via [Nodemailer](https://nodemailer.com/) (MIT, open source).
+Submissions are stored in Supabase and emailed to `maxlabs.systems@gmail.com` when an email provider is configured.
 
-### Gmail SMTP setup (free)
+### Option A: Resend (recommended)
+
+1. Sign up at [resend.com](https://resend.com) using `maxlabs.systems@gmail.com`.
+2. Create an API key.
+3. Add to `.env.local` and Vercel project env vars:
+
+```bash
+RESEND_API_KEY=re_...
+RESEND_FROM="MAXLABS Inquiries <onboarding@resend.dev>"
+INQUIRY_NOTIFICATION_EMAIL=maxlabs.systems@gmail.com
+```
+
+4. Verify with:
+
+```bash
+npm run test:email
+```
+
+### Option B: Gmail SMTP (Nodemailer)
 
 1. Sign in to the `maxlabs.systems@gmail.com` Google account.
 2. Enable 2-Step Verification on the account.
@@ -81,6 +99,7 @@ Each notification sets `Reply-To` to the visitor's email so you can respond dire
 - `npm run start` – run production server
 - `npm run lint` – ESLint
 - `npm run test` – Vitest
+- `npm run test:email` – send a test inquiry notification email
 - `npm run migrate` – apply SQL files from `supabase/migrations`
 
 ## Deployment (Vercel)

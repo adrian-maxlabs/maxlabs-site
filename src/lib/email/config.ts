@@ -15,7 +15,7 @@ const DEFAULT_NOTIFICATION_EMAIL = "maxlabs.systems@gmail.com";
 export function getSmtpConfig(): SmtpConfig | null {
   const host = process.env.SMTP_HOST;
   const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
+  const pass = process.env.SMTP_PASS?.trim();
 
   if (!host || !user || !pass) {
     return null;

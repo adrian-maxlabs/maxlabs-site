@@ -9,6 +9,7 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:email": "node scripts/test-email.mjs",
     "migrate": "node scripts/migrate.mjs"
   },
   "dependencies": {
