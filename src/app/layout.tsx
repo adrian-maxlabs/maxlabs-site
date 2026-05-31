@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ThemeSafelist } from "@/components/theme/theme-safelist";
 import { ThemeScript } from "@/components/theme/theme-script";
 import "./globals.css";
 
@@ -48,6 +49,7 @@ export default function RootLayout({
         <ThemeScript />
       </head>
       <body className="flex min-h-dvh flex-col overflow-x-hidden bg-[var(--background)] text-[var(--foreground)] antialiased">
+        <ThemeSafelist />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

@@ -47,7 +47,7 @@
   --overlay: rgb(15 23 42 / 0.5);
 }
 
-.dark {
+:root.dark {
   --background: #0a0f1a;
   --foreground: #f1f5f9;
   --primary: #60a5fa;

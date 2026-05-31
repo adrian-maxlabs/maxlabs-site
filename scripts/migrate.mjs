@@ -30,11 +30,44 @@ async function execSQL(query) {
     body: JSON.stringify({ query }),
   });
 
+  const body = await response.text();
   if (!response.ok) {
-    const body = await response.text();
     throw new Error(`HTTP ${response.status}: ${body}`);
   }
+
+  if (!body) return [];
+  try {
+    return JSON.parse(body);
+  } catch {
+    return body;
+  }
 }
+
+async function ensureMigrationsTable() {
+  await execSQL(`
+    CREATE TABLE IF NOT EXISTS public._schema_migrations (
+      filename TEXT PRIMARY KEY,
+      applied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `);
+}
+
+async function getAppliedMigrations() {
+  const rows = await execSQL(
+    "SELECT filename FROM public._schema_migrations ORDER BY filename;",
+  );
+  if (!Array.isArray(rows)) return new Set();
+  return new Set(rows.map((row) => row.filename));
+}
+
+async function recordMigration(filename) {
+  await execSQL(
+    `INSERT INTO public._schema_migrations (filename) VALUES ('${filename.replace(/'/g, "''")}');`,
+  );
+}
+
+await ensureMigrationsTable();
+const applied = await getAppliedMigrations();
 
 const migrationsDir = join(rootDir, "supabase", "migrations");
 const migrationFiles = (await readdir(migrationsDir))
@@ -46,11 +79,24 @@ if (migrationFiles.length === 0) {
   process.exit(0);
 }
 
+let ran = 0;
+
 for (const file of migrationFiles) {
+  if (applied.has(file)) {
+    console.log(`Skipping ${file} (already applied)`);
+    continue;
+  }
+
   const sql = await readFile(join(migrationsDir, file), "utf8");
   process.stdout.write(`Applying ${file}... `);
   await execSQL(sql);
+  await recordMigration(file);
   console.log("done");
+  ran++;
 }
 
-console.log("All migrations applied.");
+if (ran === 0) {
+  console.log("All migrations already applied.");
+} else {
+  console.log(`Applied ${ran} migration(s).`);
+}
