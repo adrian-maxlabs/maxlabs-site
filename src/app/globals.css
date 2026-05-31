@@ -101,6 +101,12 @@ body {
   animation: landing-word-rotate 15s linear infinite;
 }
 
+/* First phrase visible before animation paints (SSR / first paint) */
+.landing-text-rotate > span:first-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .landing-text-rotate > span:nth-child(1) {
   animation-delay: 0s;
 }
@@ -127,19 +133,19 @@ body {
 
 @keyframes landing-word-rotate {
   0%,
-  14% {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  17%,
-  30% {
+  11% {
     opacity: 1;
     transform: translateY(0);
   }
-  33%,
-  100% {
+  14%,
+  17% {
     opacity: 0;
     transform: translateY(-12px);
+  }
+  20%,
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
   }
 }
 
