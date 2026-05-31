@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ThemeScript } from "@/components/theme/theme-script";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -39,9 +41,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${plusJakarta.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="flex min-h-dvh flex-col overflow-x-hidden antialiased">{children}</body>
+      <head>
+        <ThemeScript />
+      </head>
+      <body className="flex min-h-dvh flex-col overflow-x-hidden bg-[var(--background)] text-[var(--foreground)] antialiased">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

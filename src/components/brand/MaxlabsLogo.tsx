@@ -17,6 +17,8 @@ export interface MaxlabsLogoProps {
   width?: number;
   maxHeight?: number;
   variant?: MaxlabsLogoVariant;
+  /** Light backdrop so the mark stays readable on dark surfaces */
+  contrastBackdrop?: boolean;
 }
 
 export function MaxlabsLogo({
@@ -26,12 +28,18 @@ export function MaxlabsLogo({
   width,
   maxHeight,
   variant = "full",
+  contrastBackdrop = false,
 }: MaxlabsLogoProps) {
   if (width != null && maxHeight != null) {
     throw new Error("MaxlabsLogo: pass only one of width or maxHeight");
   }
 
   const { src, width: fw, height: fh } = LOGO_ASSETS[variant];
+  const imageClassName = cn(
+    "shrink-0 object-contain object-left",
+    contrastBackdrop && "dark:rounded-md dark:bg-white/95 dark:p-0.5",
+    className,
+  );
 
   if (width != null) {
     const h = Math.round((width * fh) / fw);
@@ -42,7 +50,7 @@ export function MaxlabsLogo({
         width={width}
         height={h}
         unoptimized
-        className={cn("shrink-0 object-contain object-left", className)}
+        className={imageClassName}
         style={{ width, height: h }}
         priority={priority}
       />
@@ -58,7 +66,7 @@ export function MaxlabsLogo({
       width={w}
       height={mh}
       unoptimized
-      className={cn("shrink-0 object-contain object-left", className)}
+      className={imageClassName}
       style={{ width: w, height: mh }}
       priority={priority}
       aria-hidden={!alt}

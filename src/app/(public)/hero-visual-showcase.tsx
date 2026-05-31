@@ -221,7 +221,7 @@ function FooterPillarsStrip() {
     <div className="mt-3 grid grid-cols-3 gap-2 border-t border-white/10 pt-3">
       {FOOTER_PILLARS.map(({ icon: Icon, label }) => (
         <div key={label} className="flex flex-col items-center gap-1.5 text-center">
-          <div className="inline-flex size-9 items-center justify-center rounded-xl bg-[#dbeafe]">
+          <div className="inline-flex size-9 items-center justify-center rounded-xl bg-[var(--icon-bg)]">
             <Icon className="size-4 text-[var(--primary)]" aria-hidden="true" />
           </div>
           <span className="text-[0.5625rem] font-semibold leading-tight text-slate-200 sm:text-[0.625rem]">

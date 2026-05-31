@@ -97,7 +97,7 @@ function StepProgressRail({
             <li key={step} className="relative py-3 first:pt-0 last:pb-0">
               <span
                 className={cn(
-                  "absolute -start-[calc(0.5rem+1px)] top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-white transition-colors",
+                  "absolute -start-[calc(0.5rem+1px)] top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-[var(--background)] transition-colors",
                   isActive && "border-[var(--primary)] bg-[var(--primary)]",
                   isComplete && "border-emerald-500 bg-emerald-500",
                   !isActive && !isComplete && "border-[var(--border)]",
@@ -112,7 +112,7 @@ function StepProgressRail({
                   isActive
                     ? "font-semibold text-[var(--primary)]"
                     : isComplete
-                      ? "text-emerald-700"
+                      ? "text-emerald-700 dark:text-emerald-400"
                       : "text-[var(--muted)] hover:text-[var(--foreground)]",
                 )}
               >
@@ -158,7 +158,7 @@ function StepContent({
         {step.highlights.map((item) => (
           <li
             key={item}
-            className="flex items-start gap-2 rounded-lg border border-[var(--border)] bg-white/80 px-3 py-2 text-sm text-[var(--foreground)]"
+            className="flex items-start gap-2 rounded-lg border border-[var(--border)] bg-[var(--card)]/80 px-3 py-2 text-sm text-[var(--foreground)]"
           >
             <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[var(--primary)]" aria-hidden="true" />
             {item}
@@ -247,7 +247,7 @@ export function DeliveryProcessSection() {
                 "shrink-0 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
                 activeStep === step
                   ? "border-[var(--primary)] bg-[var(--primary)] text-white"
-                  : "border-[var(--border)] bg-white text-[var(--muted)]",
+                  : "border-[var(--border)] bg-[var(--card)] text-[var(--muted)]",
               )}
             >
               {step}. {badge}

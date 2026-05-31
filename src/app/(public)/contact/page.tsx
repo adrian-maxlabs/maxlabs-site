@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ArrowLeft, Shield } from "lucide-react";
 import { MaxlabsBrandLockup } from "@/components/brand/MaxlabsBrandLockup";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { ContactInquiryForm } from "@/features/inquiries/components/ContactInquiryForm";
 import { CONTACT_EMAIL, CONTACT_PHONES, phoneToTelHref } from "@/lib/contact-info";
 
@@ -21,13 +22,16 @@ const TRUST_POINTS = [
 
 export default function ContactPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-white font-sans">
-      <header className="border-b border-[#e2e8f0] bg-white">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:h-16 sm:px-6 lg:px-10">
+    <div className="flex min-h-screen flex-col bg-[var(--background)] font-sans">
+      <header className="border-b border-[var(--border)] bg-[var(--background)]/95 backdrop-blur-sm">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6 lg:px-10">
           <Link href="/" aria-label="Back to MAXLABS home" className="flex min-w-0 items-center gap-2">
-            <MaxlabsBrandLockup priority />
+            <MaxlabsBrandLockup priority logoContrastBackdrop />
           </Link>
-          <p className="text-sm text-[#64748b]">Initial Consultation</p>
+          <div className="flex items-center gap-3">
+            <p className="hidden text-sm text-[var(--muted)] sm:block">Initial Consultation</p>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
@@ -35,7 +39,7 @@ export default function ContactPage() {
         <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6 lg:px-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-lg p-1 text-sm font-medium text-[#1d4ed8] hover:bg-[#eff6ff]"
+            className="inline-flex items-center gap-2 rounded-lg p-1 text-sm font-medium text-[var(--primary)] hover:bg-[var(--accent-subtle)]"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
             Back to home
@@ -44,33 +48,31 @@ export default function ContactPage() {
 
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-6 sm:px-6 sm:py-10 lg:grid-cols-[1fr_2fr] lg:gap-14 lg:px-10 lg:py-14">
           <aside>
-            <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-[#1d4ed8]">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-[var(--primary)]">
               Let us build with you
             </p>
-            <h1
-              className="mb-4 font-display text-3xl font-bold text-[#0f172a]"
-            >
+            <h1 className="mb-4 font-display text-3xl font-bold text-[var(--foreground)]">
               Request a Consultation
             </h1>
-            <p className="mb-6 text-sm leading-relaxed text-[#64748b] sm:text-base">
+            <p className="mb-6 text-sm leading-relaxed text-[var(--muted)] sm:text-base">
               Tell us your goals, current workflow challenges, and preferred service interest.
               We will respond with a practical next-step recommendation.
             </p>
 
-            <ul className="space-y-2 text-sm text-[#334155]">
+            <ul className="space-y-2 text-sm text-[var(--muted-foreground)]">
               {TRUST_POINTS.map((point) => (
                 <li key={point} className="flex items-start gap-2">
-                  <Shield className="mt-0.5 size-4 shrink-0 text-[#1d4ed8]" aria-hidden="true" />
+                  <Shield className="mt-0.5 size-4 shrink-0 text-[var(--primary)]" aria-hidden="true" />
                   <span>{point}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="mt-8 rounded-xl border border-[#e2e8f0] bg-[#f8fafc] p-4">
-              <p className="text-sm text-[#64748b]">Prefer direct contact?</p>
+            <div className="mt-8 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
+              <p className="text-sm text-[var(--muted)]">Prefer direct contact?</p>
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="mt-1 block text-sm font-medium text-[#1d4ed8] hover:underline"
+                className="mt-1 block text-sm font-medium text-[var(--primary)] hover:underline"
               >
                 {CONTACT_EMAIL}
               </a>
@@ -79,7 +81,7 @@ export default function ContactPage() {
                   <li key={phone}>
                     <a
                       href={phoneToTelHref(phone)}
-                      className="text-sm font-medium text-[#1d4ed8] hover:underline"
+                      className="text-sm font-medium text-[var(--primary)] hover:underline"
                     >
                       {phone}
                     </a>
@@ -91,9 +93,9 @@ export default function ContactPage() {
 
           <section
             aria-labelledby="inquiry-form-heading"
-            className="rounded-2xl border border-[#e2e8f0] bg-white p-6 shadow-sm sm:p-8"
+            className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm sm:p-8"
           >
-            <h2 id="inquiry-form-heading" className="mb-6 text-xl font-semibold text-[#0f172a]">
+            <h2 id="inquiry-form-heading" className="mb-6 text-xl font-semibold text-[var(--foreground)]">
               Tell us about your requirements
             </h2>
             <ContactInquiryForm />

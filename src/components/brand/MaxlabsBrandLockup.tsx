@@ -7,6 +7,7 @@ export interface MaxlabsBrandLockupProps {
   logoMaxHeight?: number;
   priority?: boolean;
   textClassName?: string;
+  logoContrastBackdrop?: boolean;
 }
 
 export function MaxlabsBrandLockup({
@@ -14,10 +15,16 @@ export function MaxlabsBrandLockup({
   logoMaxHeight = 34,
   priority = false,
   textClassName = "text-lg sm:text-xl",
+  logoContrastBackdrop = false,
 }: MaxlabsBrandLockupProps) {
   return (
     <span className={cn("flex min-w-0 items-center gap-2", className)}>
-      <MaxlabsLogo variant="mark" maxHeight={logoMaxHeight} priority={priority} />
+      <MaxlabsLogo
+        variant="mark"
+        maxHeight={logoMaxHeight}
+        priority={priority}
+        contrastBackdrop={logoContrastBackdrop}
+      />
       <MaxlabsWordmark textClassName={textClassName} />
     </span>
   );

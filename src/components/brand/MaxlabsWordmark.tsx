@@ -1,9 +1,4 @@
-"use client";
-
-import { AuroraText } from "@/components/ui/aurora-text";
 import { cn } from "@/lib/utils";
-
-const BRAND_AURORA_COLORS = ["#1d4ed8", "#38bdf8", "#0070F3", "#7928CA"] as const;
 
 export interface MaxlabsWordmarkProps {
   className?: string;
@@ -20,9 +15,14 @@ export function MaxlabsWordmark({ className, textClassName }: MaxlabsWordmarkPro
         )}
       >
         <span>MAX</span>
-        <AuroraText className={cn("font-bold", textClassName)} colors={[...BRAND_AURORA_COLORS]}>
+        <span
+          className={cn(
+            "bg-gradient-to-r from-[#1d4ed8] via-[#38bdf8] to-[#7928CA] bg-clip-text font-bold text-transparent",
+            textClassName,
+          )}
+        >
           LABS
-        </AuroraText>
+        </span>
       </span>
       <span className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--foreground)]/75 sm:text-[10px]">
         I.T SOLUTIONS

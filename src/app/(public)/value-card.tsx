@@ -141,7 +141,7 @@ export function ValueCard({
     <article
       ref={ref}
       className={cn(
-        "group relative h-full overflow-hidden rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md sm:p-7",
+        "group relative h-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm transition-shadow duration-300 hover:shadow-md sm:p-7",
         featured && "flex flex-col justify-between lg:p-8",
       )}
       style={{
@@ -160,7 +160,7 @@ export function ValueCard({
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -end-8 -top-8 size-32 rounded-full bg-white/40 blur-2xl"
+        className="pointer-events-none absolute -end-8 -top-8 size-32 rounded-full bg-[var(--card)]/40 blur-2xl"
         aria-hidden="true"
       />
 

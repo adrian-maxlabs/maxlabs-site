@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { MaxlabsBrandLockup } from "@/components/brand/MaxlabsBrandLockup";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { DeliveryProcessSection } from "./delivery-process-section";
 import { FeatureStoryCard } from "./feature-story-card";
 import { HeroLoopBackground } from "./hero-loop-background";
@@ -35,18 +36,19 @@ function SectionHeading({ title, subtitle }: { title: string; subtitle: string }
 
 export default function LandingPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-white font-sans">
+    <div className="flex min-h-screen flex-col bg-[var(--background)] font-sans">
       <LandingHashSync />
 
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--border)] bg-white">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--border)] bg-[var(--background)]/95 backdrop-blur-sm">
         <nav className="mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto] items-center gap-3 px-4 sm:h-16 sm:px-6 lg:grid-cols-[1fr_auto_1fr] lg:px-10">
           <Link href="/" className="flex min-w-0 items-center gap-2" aria-label="MAXLABS home">
-            <MaxlabsBrandLockup priority />
+            <MaxlabsBrandLockup priority logoContrastBackdrop />
           </Link>
 
           <LandingNavMenu className="justify-self-end lg:justify-self-center" />
 
-          <div className="hidden justify-self-end lg:block">
+          <div className="hidden items-center justify-end gap-3 justify-self-end lg:flex">
+            <ThemeToggle />
             <Link
               href="/contact"
               className="inline-flex h-10 items-center justify-center rounded-lg bg-[var(--primary)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--primary-hover)]"
@@ -163,7 +165,7 @@ export default function LandingPage() {
 
         <DeliveryProcessSection />
 
-        <section className="border-t border-[var(--border)] bg-white px-4 py-14 sm:px-6 lg:px-10">
+        <section className="border-t border-[var(--border)] bg-[var(--background)] px-4 py-14 sm:px-6 lg:px-10">
           <div className="mx-auto max-w-4xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 text-center">
             <h2
               className="mb-3 font-display text-3xl font-bold text-[var(--foreground)]"

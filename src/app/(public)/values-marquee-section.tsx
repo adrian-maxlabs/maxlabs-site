@@ -7,7 +7,7 @@ export function ValuesMarqueeSection() {
   return (
     <section
       id="values"
-      className="scroll-mt-[5.5rem] border-t border-[var(--border)] bg-white"
+      className="scroll-mt-[5.5rem] border-t border-[var(--border)] bg-[var(--background)]"
       aria-labelledby="values-heading"
     >
       <div

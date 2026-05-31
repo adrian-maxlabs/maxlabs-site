@@ -21,7 +21,7 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="scroll-mt-[5.5rem] border-t border-[var(--border)] bg-white"
+      className="scroll-mt-[5.5rem] border-t border-[var(--border)] bg-[var(--background)]"
       aria-labelledby="about-heading"
     >
       <div className="relative overflow-hidden px-4 py-10 sm:px-6 sm:py-12 lg:px-10">
@@ -68,7 +68,7 @@ export function AboutSection() {
                     {FOCUS_PILLS.map((pill) => (
                       <li
                         key={pill}
-                        className="rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs font-medium text-[var(--foreground)]/85"
+                        className="rounded-full border border-[var(--border)] bg-[var(--card)] px-3 py-1 text-xs font-medium text-[var(--foreground)]/85"
                       >
                         {pill}
                       </li>
@@ -78,13 +78,13 @@ export function AboutSection() {
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
-                <article className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-white p-4 shadow-sm sm:p-5">
+                <article className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 shadow-sm sm:p-5">
                   <div
                     className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sky-400 to-sky-600"
                     aria-hidden="true"
                   />
-                  <div className="mb-3 inline-flex size-9 items-center justify-center rounded-lg bg-sky-100">
-                    <Target className="size-4 text-sky-700" aria-hidden="true" />
+                  <div className="mb-3 inline-flex size-9 items-center justify-center rounded-lg bg-sky-100 dark:bg-sky-900/40">
+                    <Target className="size-4 text-sky-700 dark:text-sky-300" aria-hidden="true" />
                   </div>
                   <h3 className="mb-1.5 font-display text-base font-semibold text-[var(--foreground)]">
                     Mission
@@ -95,13 +95,13 @@ export function AboutSection() {
                   </p>
                 </article>
 
-                <article className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-white p-4 shadow-sm sm:p-5">
+                <article className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 shadow-sm sm:p-5">
                   <div
                     className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-indigo-400 to-violet-500"
                     aria-hidden="true"
                   />
-                  <div className="mb-3 inline-flex size-9 items-center justify-center rounded-lg bg-indigo-100">
-                    <Building2 className="size-4 text-indigo-700" aria-hidden="true" />
+                  <div className="mb-3 inline-flex size-9 items-center justify-center rounded-lg bg-indigo-100 dark:bg-indigo-900/40">
+                    <Building2 className="size-4 text-indigo-700 dark:text-indigo-300" aria-hidden="true" />
                   </div>
                   <h3 className="mb-1.5 font-display text-base font-semibold text-[var(--foreground)]">
                     Vision

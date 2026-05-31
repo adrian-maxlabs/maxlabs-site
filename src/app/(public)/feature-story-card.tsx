@@ -64,7 +64,7 @@ export function FeatureStoryCard({ id, icon, title, description }: FeatureStoryC
       id={id}
       ref={ref}
       className={cn(
-        "rounded-2xl border border-[var(--border)] border-l-4 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md",
+        "rounded-2xl border border-[var(--border)] border-l-4 bg-[var(--card)] p-6 shadow-sm transition-shadow duration-300 hover:shadow-md",
         LEFT_BORDER_ACCENT[icon],
         id && "scroll-mt-[5.5rem]",
       )}
@@ -74,7 +74,7 @@ export function FeatureStoryCard({ id, icon, title, description }: FeatureStoryC
         transition: visible ? "opacity 0.45s ease, transform 0.45s ease" : "none",
       }}
     >
-      <div className="mb-4 inline-flex size-11 items-center justify-center rounded-xl bg-[#dbeafe]">
+      <div className="mb-4 inline-flex size-11 items-center justify-center rounded-xl bg-[var(--icon-bg)]">
         <Icon className="size-5 text-[var(--primary)]" aria-hidden="true" />
       </div>
       <h3 className="mb-2 text-lg font-semibold text-[var(--foreground)]">{title}</h3>

@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { navigateToLandingSection } from "./landing-scroll";
 
 type NavItem = {
@@ -93,22 +94,25 @@ function MobileMenu() {
           <div className="fixed inset-0 z-[70] lg:hidden" role="dialog" aria-modal="true">
             <button
               type="button"
-              className="absolute inset-0 bg-[#0f172a]/50"
+              className="absolute inset-0 bg-[var(--overlay)]"
               aria-label="Close navigation menu"
               onClick={closeMenu}
             />
-            <div className="absolute inset-x-0 top-0 border-b border-[var(--border)] bg-white p-4 shadow-lg">
+            <div className="absolute inset-x-0 top-0 border-b border-[var(--border)] bg-[var(--background)] p-4 shadow-lg">
               <div className="mb-3 flex items-center justify-between">
                 <p className="text-sm font-semibold text-[var(--foreground)]">Navigation</p>
-                <button
-                  ref={closeButtonRef}
-                  type="button"
-                  onClick={closeMenu}
-                  className="inline-flex size-9 items-center justify-center rounded-md border border-[var(--border)]"
-                  aria-label="Close menu"
-                >
+                <div className="flex items-center gap-2">
+                  <ThemeToggle />
+                  <button
+                    ref={closeButtonRef}
+                    type="button"
+                    onClick={closeMenu}
+                    className="inline-flex size-9 items-center justify-center rounded-md border border-[var(--border)]"
+                    aria-label="Close menu"
+                  >
                   <X className="size-4" aria-hidden="true" />
                 </button>
+                </div>
               </div>
               <ul className="space-y-1" role="list">
                 {NAV_ITEMS.map((item) => (
@@ -141,6 +145,7 @@ function MobileMenu() {
 
   return (
     <>
+      <ThemeToggle className="mr-2 lg:hidden" />
       <button
         type="button"
         onClick={() => setOpen(true)}
