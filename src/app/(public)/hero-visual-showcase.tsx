@@ -4,14 +4,27 @@ import {
   ArrowUpRight,
   Bot,
   ChartLine,
+  CheckCircle2,
+  GitBranch,
   TrendingUp,
   Users,
+  Zap,
   type LucideIcon,
 } from "lucide-react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type HeroVisualShowcaseProps = {
   className?: string;
+};
+
+type ScrollMicroDetail = {
+  id: string;
+  speed: number;
+  driftX: number;
+  rotate: number;
+  className: string;
+  content: ReactNode;
 };
 
 const OUTCOME_ROWS = [
@@ -53,6 +66,182 @@ const FOOTER_PILLARS: { icon: LucideIcon; label: string }[] = [
   { icon: Users, label: "Team capacity freed" },
 ];
 
+const SCROLL_MICRO_DETAILS: ScrollMicroDetail[] = [
+  {
+    id: "admin-time",
+    speed: 1.15,
+    driftX: 52,
+    rotate: -5,
+    className: "left-0 top-[20%] lg:-left-10",
+    content: (
+      <>
+        <span className="relative flex size-2">
+          <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+          <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
+        </span>
+        <div>
+          <p className="text-[0.625rem] font-semibold uppercase tracking-wide text-emerald-300">
+            Admin time
+          </p>
+          <p className="text-xs font-medium text-white">40% less overhead</p>
+        </div>
+      </>
+    ),
+  },
+  {
+    id: "reporting",
+    speed: 0.95,
+    driftX: -46,
+    rotate: 4,
+    className: "right-0 bottom-[26%] lg:-right-8",
+    content: (
+      <>
+        <div className="flex size-8 items-center justify-center rounded-lg bg-sky-500/20">
+          <ChartLine className="size-4 text-sky-300" aria-hidden="true" />
+        </div>
+        <div>
+          <p className="text-[0.625rem] text-slate-400">Reporting</p>
+          <p className="text-sm font-bold text-white">On demand</p>
+        </div>
+      </>
+    ),
+  },
+  {
+    id: "auto-approvals",
+    speed: 1.35,
+    driftX: 68,
+    rotate: -8,
+    className: "left-[4%] top-[2%] lg:-left-2",
+    content: (
+      <>
+        <CheckCircle2 className="size-3.5 text-emerald-400" aria-hidden="true" />
+        <span className="text-[0.625rem] font-semibold text-white">Auto approvals</span>
+      </>
+    ),
+  },
+  {
+    id: "workflow-sync",
+    speed: 1.05,
+    driftX: -58,
+    rotate: 6,
+    className: "right-[2%] top-[10%] lg:-right-1",
+    content: (
+      <>
+        <GitBranch className="size-3.5 text-violet-300" aria-hidden="true" />
+        <span className="text-[0.625rem] font-semibold text-white">Workflow sync</span>
+      </>
+    ),
+  },
+  {
+    id: "faster-decisions",
+    speed: 1.25,
+    driftX: 38,
+    rotate: -3,
+    className: "left-[10%] bottom-[10%] lg:-left-4",
+    content: (
+      <>
+        <Zap className="size-3.5 text-amber-300" aria-hidden="true" />
+        <span className="text-[0.625rem] font-semibold text-white">3× faster decisions</span>
+      </>
+    ),
+  },
+  {
+    id: "live-dashboards",
+    speed: 0.88,
+    driftX: -34,
+    rotate: 5,
+    className: "right-[8%] bottom-[6%] lg:-right-3",
+    content: (
+      <>
+        <TrendingUp className="size-3.5 text-sky-300" aria-hidden="true" />
+        <span className="text-[0.625rem] font-semibold text-white">Live dashboards</span>
+      </>
+    ),
+  },
+];
+
+function useHeroScrollProgress(rootRef: React.RefObject<HTMLElement | null>) {
+  const [progress, setProgress] = useState(0);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncReducedMotion = () => setReducedMotion(motionQuery.matches);
+    syncReducedMotion();
+    motionQuery.addEventListener("change", syncReducedMotion);
+
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      if (motionQuery.matches) {
+        setProgress(0);
+        return;
+      }
+
+      const root = rootRef.current;
+      const hero = root?.closest("[data-hero-scroll-root]") as HTMLElement | null;
+      if (!hero) {
+        setProgress(0);
+        return;
+      }
+
+      const rect = hero.getBoundingClientRect();
+      const scrollRange = Math.max(hero.offsetHeight - window.innerHeight * 0.55, window.innerHeight * 0.45);
+      const traveled = Math.max(-rect.top, 0);
+      setProgress(Math.min(traveled / scrollRange, 1));
+    };
+
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    return () => {
+      motionQuery.removeEventListener("change", syncReducedMotion);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      window.cancelAnimationFrame(frame);
+    };
+  }, [rootRef]);
+
+  return { progress, reducedMotion };
+}
+
+function getMicroDetailStyle(
+  detail: ScrollMicroDetail,
+  progress: number,
+  reducedMotion: boolean,
+): CSSProperties {
+  if (reducedMotion) return {};
+
+  const lift = progress * 420 * detail.speed;
+  const drift = progress * detail.driftX;
+  const spin = detail.rotate * (1 - progress * 0.65);
+  const fade = 1 - progress * 0.92;
+  const scale = 1 - progress * 0.12;
+
+  return {
+    transform: `translate3d(${drift}px, ${-lift}px, 0) rotate(${spin}deg) scale(${scale})`,
+    opacity: fade,
+  };
+}
+
+function getMainCardStyle(progress: number, reducedMotion: boolean): CSSProperties {
+  if (reducedMotion) return {};
+
+  const tiltX = 7 - progress * 7;
+  const tiltY = -4 + progress * 4;
+  const lift = progress * 28;
+
+  return {
+    transform: `perspective(1400px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translate3d(0, ${-lift}px, 0)`,
+  };
+}
+
 function PostGoLiveChart() {
   return (
     <svg
@@ -73,7 +262,6 @@ function PostGoLiveChart() {
           <stop offset="100%" stopColor="#38bdf8" />
         </linearGradient>
       </defs>
-      {/* Pre-implementation flat segment */}
       <path
         d="M0 88 L85 87"
         fill="none"
@@ -83,7 +271,6 @@ function PostGoLiveChart() {
         strokeDasharray="4 4"
         opacity="0.7"
       />
-      {/* Go-live inflection + growth */}
       <path
         d="M85 87 L120 72 L160 58 L200 38 L240 24 L280 14"
         fill="none"
@@ -223,10 +410,59 @@ function FooterPillarsStrip() {
   );
 }
 
-export function HeroVisualShowcase({ className }: HeroVisualShowcaseProps) {
+function ScrollMicroDetailChip({
+  detail,
+  progress,
+  reducedMotion,
+}: {
+  detail: ScrollMicroDetail;
+  progress: number;
+  reducedMotion: boolean;
+}) {
+  const isCompact = detail.id === "auto-approvals" || detail.id === "workflow-sync" || detail.id === "faster-decisions" || detail.id === "live-dashboards";
+
   return (
-    <div className={cn("relative mx-auto w-full max-w-lg lg:max-w-none", className)}>
-      <div className="hero-float-main relative rounded-2xl border border-white/15 bg-[#0f172a]/90 p-4 shadow-2xl shadow-sky-950/50 backdrop-blur-md sm:p-5">
+    <div
+      className={cn(
+        "hero-scroll-micro pointer-events-none absolute z-20 hidden will-change-transform sm:flex",
+        isCompact ? "items-center gap-1.5 rounded-full border px-2.5 py-1.5 shadow-lg backdrop-blur-sm" : "items-center gap-2 rounded-xl border px-3 py-2 shadow-lg backdrop-blur-sm",
+        detail.className,
+        detail.id === "admin-time" && "border-emerald-400/30 bg-[#0f172a]/95",
+        detail.id === "reporting" && "border-sky-400/30 bg-[#0f172a]/95",
+        (detail.id === "auto-approvals" || detail.id === "faster-decisions") && "border-emerald-400/25 bg-[#0f172a]/90",
+        (detail.id === "workflow-sync" || detail.id === "live-dashboards") && "border-sky-400/25 bg-[#0f172a]/90",
+      )}
+      style={getMicroDetailStyle(detail, progress, reducedMotion)}
+      aria-hidden="true"
+    >
+      {detail.content}
+    </div>
+  );
+}
+
+export function HeroVisualShowcase({ className }: HeroVisualShowcaseProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const { progress, reducedMotion } = useHeroScrollProgress(rootRef);
+
+  return (
+    <div
+      ref={rootRef}
+      className={cn("hero-scroll-stage relative mx-auto w-full max-w-lg lg:max-w-none", className)}
+    >
+      {SCROLL_MICRO_DETAILS.map((detail) => (
+        <ScrollMicroDetailChip
+          key={detail.id}
+          detail={detail}
+          progress={progress}
+          reducedMotion={reducedMotion}
+        />
+      ))}
+
+      <div
+        className="hero-scroll-main-wrap will-change-transform"
+        style={getMainCardStyle(progress, reducedMotion)}
+      >
+        <div className="hero-float-main relative origin-top rounded-2xl border border-white/15 bg-[#0f172a]/90 p-4 shadow-2xl shadow-sky-950/50 backdrop-blur-md sm:p-5">
         <div className="mb-3 flex items-start justify-between gap-2 border-b border-white/10 pb-3">
           <div>
             <div className="mb-1 flex items-center gap-2">
@@ -308,32 +544,6 @@ export function HeroVisualShowcase({ className }: HeroVisualShowcaseProps) {
         <p className="mt-3 text-center text-[0.5rem] leading-snug text-slate-500 sm:text-[0.5625rem]">
           Illustrative outcomes based on typical SME engagements
         </p>
-      </div>
-
-      <div className="hero-float-badge absolute -left-3 top-1/4 hidden rounded-xl border border-emerald-400/30 bg-[#0f172a]/95 px-3 py-2 shadow-lg backdrop-blur-sm sm:block lg:-left-6">
-        <div className="flex items-center gap-2">
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-            <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
-          </span>
-          <div>
-            <p className="text-[0.625rem] font-semibold uppercase tracking-wide text-emerald-300">
-              Admin time
-            </p>
-            <p className="text-xs font-medium text-white">40% less overhead</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="hero-float-badge-delayed absolute -right-2 bottom-20 hidden rounded-xl border border-sky-400/30 bg-[#0f172a]/95 px-3 py-2 shadow-lg backdrop-blur-sm sm:block lg:-right-4">
-        <div className="flex items-center gap-2">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-sky-500/20">
-            <ChartLine className="size-4 text-sky-300" aria-hidden="true" />
-          </div>
-          <div>
-            <p className="text-[0.625rem] text-slate-400">Reporting</p>
-            <p className="text-sm font-bold text-white">On demand</p>
-          </div>
         </div>
       </div>
     </div>

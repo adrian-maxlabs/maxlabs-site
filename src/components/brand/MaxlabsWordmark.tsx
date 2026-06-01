@@ -15,14 +15,7 @@ export function MaxlabsWordmark({ className, textClassName }: MaxlabsWordmarkPro
         )}
       >
         <span>MAX</span>
-        <span
-          className={cn(
-            "bg-gradient-to-r from-[#1d4ed8] via-[#38bdf8] to-[#7928CA] bg-clip-text font-bold text-transparent",
-            textClassName,
-          )}
-        >
-          LABS
-        </span>
+        <span>LABS</span>
       </span>
       <span className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--foreground)]/75 sm:text-[10px]">
         I.T SOLUTIONS

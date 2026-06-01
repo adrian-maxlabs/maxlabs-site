@@ -63,6 +63,7 @@ export default function LandingPage() {
 
       <main>
         <section
+          data-hero-scroll-root
           className="relative isolate flex min-h-[calc(100svh-3.5rem)] flex-col overflow-hidden sm:min-h-[calc(100svh-4rem)]"
           aria-label="Hero"
         >
@@ -76,7 +77,7 @@ export default function LandingPage() {
               <h1
                 className="font-display text-balance text-4xl font-extrabold leading-tight text-white sm:text-5xl md:text-6xl"
               >
-                Maximize Your Business In
+                Maximize Your Business With
                 <span className="mt-2 block text-[#38bdf8] landing-text-rotate" aria-live="polite">
                   <span>Business Digitalization</span>
                   <span>Workflow Automation</span>

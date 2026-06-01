@@ -162,16 +162,20 @@ body {
   }
 }
 
+.hero-scroll-stage {
+  perspective: 1400px;
+}
+
+.hero-scroll-main-wrap {
+  transform-style: preserve-3d;
+}
+
 .hero-float-main {
   animation: hero-float 6s ease-in-out infinite;
 }
 
-.hero-float-badge {
-  animation: hero-float 5s ease-in-out infinite;
-}
-
-.hero-float-badge-delayed {
-  animation: hero-float 5s ease-in-out 1.5s infinite;
+.hero-scroll-micro {
+  filter: drop-shadow(-0.5rem 1rem 0.75rem rgb(2 6 23 / 0.35));
 }
 
 @keyframes hero-float {
@@ -302,10 +306,18 @@ body {
     min-height: auto !important;
   }
 
-  .hero-float-main,
-  .hero-float-badge,
-  .hero-float-badge-delayed {
+  .hero-scroll-main-wrap {
+    transform: none !important;
+  }
+
+  .hero-float-main {
     animation: none;
+  }
+
+  .hero-scroll-micro {
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none;
   }
 
   .hero-chart-line {
