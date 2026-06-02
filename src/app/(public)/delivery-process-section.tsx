@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { DELIVERY_STEP_MOCKS } from "./delivery-step-mocks";
+import { LandingDotField } from "./landing-dot-field";
 
 const DELIVERY_STEPS = [
   {
@@ -219,9 +220,10 @@ export function DeliveryProcessSection() {
   return (
     <section
       id="process"
-      className="scroll-mt-[5.5rem] border-t border-[var(--border)] bg-[var(--surface)]"
+      className="relative scroll-mt-[5.5rem] border-t border-[var(--border)] bg-[var(--surface)]"
     >
-      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-10">
+      <LandingDotField />
+      <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-10">
         <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--primary)]">
             Delivery Framework

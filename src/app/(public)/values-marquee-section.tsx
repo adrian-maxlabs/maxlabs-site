@@ -1,5 +1,6 @@
 import { ValuesGrid } from "./value-card";
 import { ValuesMarqueePhrase } from "./values-marquee-phrase";
+import { LandingDotField } from "./landing-dot-field";
 
 const MARQUEE_TEXT = "MAXIMIZE YOUR BUSINESS WITH MAXLABS";
 
@@ -14,6 +15,7 @@ export function ValuesMarqueeSection() {
         className="values-marquee relative overflow-hidden border-b border-[var(--border)] bg-[var(--surface)] py-8 sm:py-10"
         aria-label={MARQUEE_TEXT}
       >
+        <LandingDotField />
         <div
           className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[var(--surface)] to-transparent sm:w-24"
           aria-hidden="true"
@@ -22,7 +24,7 @@ export function ValuesMarqueeSection() {
           className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[var(--surface)] to-transparent sm:w-24"
           aria-hidden="true"
         />
-        <div className="values-marquee-track flex w-max items-center">
+        <div className="relative z-10 values-marquee-track flex w-max items-center">
           <div className="flex shrink-0 items-center">
             {Array.from({ length: 4 }).map((_, i) => (
               <ValuesMarqueePhrase key={`a-${i}`} />
@@ -37,6 +39,7 @@ export function ValuesMarqueeSection() {
       </div>
 
       <div className="relative overflow-hidden px-4 py-14 sm:px-6 sm:py-20 lg:px-10">
+        <LandingDotField />
         <div
           className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-[var(--primary)]/5 blur-3xl"
           aria-hidden="true"
@@ -46,7 +49,7 @@ export function ValuesMarqueeSection() {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-6xl">
+        <div className="relative z-10 mx-auto max-w-6xl">
           <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--primary)]">
               Our Principles

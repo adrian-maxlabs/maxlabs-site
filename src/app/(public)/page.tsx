@@ -15,6 +15,7 @@ import { LandingNavMenu } from "./landing-nav-menu";
 import { AboutSection } from "./about-section";
 import { ProjectsSection } from "./projects-section";
 import { ValuesMarqueeSection } from "./values-marquee-section";
+import { LandingDotField } from "./landing-dot-field";
 
 export const metadata: Metadata = {
   title: "MAXLABS I.T SOLUTIONS",
@@ -67,9 +68,6 @@ export default function LandingPage() {
 
           <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-4 py-14 sm:px-6 lg:grid lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-10 lg:px-10 xl:gap-14">
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-              <p className="mb-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium tracking-wide text-white/90 sm:text-sm">
-                MAXLABS I.T. SOLUTIONS
-              </p>
               <h1
                 className="font-display text-balance text-4xl font-extrabold leading-tight text-white sm:text-5xl md:text-6xl"
               >
@@ -114,9 +112,11 @@ export default function LandingPage() {
 
         <section
           id="services"
-          className="scroll-mt-[5.5rem] border-t border-[var(--border)] bg-[var(--surface)] px-4 py-14 sm:px-6 sm:py-20 lg:px-10"
+          className="relative overflow-hidden scroll-mt-[5.5rem] border-t border-[var(--border)] bg-[var(--surface)]"
         >
-          <div className="mx-auto max-w-6xl">
+          <LandingDotField />
+
+          <div className="relative z-10 mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-10">
             <SectionHeading
               title="Services and Capabilities"
               subtitle="Modular services that can be delivered end-to-end or phased based on business priorities."
@@ -162,8 +162,11 @@ export default function LandingPage() {
 
         <DeliveryProcessSection />
 
-        <section className="border-t border-[var(--border)] bg-[var(--background)] px-4 py-14 sm:px-6 lg:px-10">
-          <div className="mx-auto max-w-4xl rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 text-center">
+        <section className="relative overflow-hidden border-t border-[var(--border)] bg-[var(--background)]">
+          <LandingDotField />
+
+          <div className="relative z-10 mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-10">
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 text-center">
             <h2
               className="mb-3 font-display text-3xl font-bold text-[var(--foreground)]"
             >
@@ -179,6 +182,7 @@ export default function LandingPage() {
               Talk to MAXLABS
               <ArrowRight className="ml-2 size-4" aria-hidden="true" />
             </Link>
+            </div>
           </div>
         </section>
       </main>

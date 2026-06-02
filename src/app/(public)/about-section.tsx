@@ -1,5 +1,6 @@
 import { Building2, FileCheck2, Target } from "lucide-react";
 import { MaxlabsLogo } from "@/components/brand/MaxlabsLogo";
+import { LandingDotField } from "./landing-dot-field";
 
 const REGISTRATION_DETAILS = [
   { label: "Registered Trade Name", value: "MAXLABS I.T. SOLUTIONS" },
@@ -25,12 +26,14 @@ export function AboutSection() {
       aria-labelledby="about-heading"
     >
       <div className="relative overflow-hidden px-4 py-10 sm:px-6 sm:py-12 lg:px-10">
+        <LandingDotField />
+
         <div
           className="pointer-events-none absolute -left-16 top-8 h-56 w-56 rounded-full bg-[var(--primary)]/5 blur-3xl"
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto max-w-6xl">
+        <div className="relative z-10 mx-auto max-w-6xl">
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(17rem,22rem)] lg:items-stretch lg:gap-5">
             <div className="flex flex-col gap-4">
               <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 sm:p-6">

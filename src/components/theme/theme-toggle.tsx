@@ -21,35 +21,43 @@ export function ThemeToggle({ className, showLabel = false }: ThemeToggleProps) 
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       onClick={toggleTheme}
       className={cn(
-        "group relative inline-flex h-9 w-[3.25rem] shrink-0 items-center rounded-full border border-[var(--border)] bg-[var(--surface)] p-0.5 transition-colors",
+        "group relative inline-flex h-9 w-14 shrink-0 items-center rounded-full border border-[var(--border)] p-0.5",
+        "bg-[var(--icon-bg)] transition-[background-color,box-shadow] duration-300 ease-out",
+        isDark && "bg-[var(--accent-subtle)]",
         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)]",
+        "hover:shadow-[0_2px_10px_color-mix(in_srgb,var(--primary)_22%,transparent)]",
         className,
       )}
     >
-      <span className="pointer-events-none absolute inset-0 flex items-center justify-between px-1.5">
+      <span
+        className={cn(
+          "relative z-[1] flex size-7 items-center justify-center rounded-full bg-white shadow-[0_1px_4px_color-mix(in_srgb,var(--primary)_28%,transparent)] ring-1 ring-[var(--border)] dark:bg-slate-50",
+          "transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.34,1.2,0.64,1)]",
+          "group-active:scale-95",
+          isDark ? "translate-x-6" : "translate-x-0",
+          !mounted && "opacity-0",
+        )}
+        aria-hidden="true"
+      >
         <Sun
           className={cn(
-            "size-3.5 transition-colors",
-            isDark ? "text-[var(--muted)]" : "text-amber-500",
+            "absolute size-3.5 text-[var(--primary)] transition-all duration-300",
+            isDark
+              ? "scale-0 rotate-90 opacity-0"
+              : "scale-100 rotate-0 opacity-100",
           )}
           aria-hidden="true"
         />
         <Moon
           className={cn(
-            "size-3.5 transition-colors",
-            isDark ? "text-sky-300" : "text-[var(--muted)]",
+            "absolute size-3.5 text-[var(--primary)] transition-all duration-300",
+            isDark
+              ? "scale-100 rotate-0 opacity-100"
+              : "scale-0 -rotate-90 opacity-0",
           )}
           aria-hidden="true"
         />
       </span>
-      <span
-        className={cn(
-          "relative z-[1] size-7 rounded-full bg-[var(--card)] shadow-sm ring-1 ring-[var(--border)] transition-transform duration-200",
-          isDark ? "translate-x-[1.35rem]" : "translate-x-0",
-          !mounted && "opacity-0",
-        )}
-        aria-hidden="true"
-      />
       {showLabel ? (
         <span className="sr-only">{isDark ? "Dark mode on" : "Light mode on"}</span>
       ) : null}
