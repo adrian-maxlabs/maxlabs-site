@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import {
   BadgeCheck,
   Building2,
-  Handshake,
+  CheckCircle2,
+  HandHeart,
   LockKeyhole,
   Wrench,
   type LucideIcon,
@@ -13,7 +14,7 @@ import { cn } from "@/lib/utils";
 
 const ICON_MAP = {
   wrench: Wrench,
-  handshake: Handshake,
+  handHeart: HandHeart,
   badgeCheck: BadgeCheck,
   lockKeyhole: LockKeyhole,
   building: Building2,
@@ -33,9 +34,30 @@ export type ValueItem = {
   body: string;
   icon: ValueIcon;
   accent: ValueAccent;
+  detail?: string;
+  highlights?: readonly string[];
 };
 
 export const CORE_VALUES: ValueItem[] = [
+  {
+    title: "God-Fearing Business",
+    body: "We lead with integrity, honesty, and humility before God and man. Client processes and data are handled with confidentiality, professionalism, and faithful stewardship.",
+    detail:
+      "Every engagement is guided by integrity first. That shapes how we scope work, protect your data, and stay accountable when priorities or tradeoffs shift.",
+    highlights: [
+      "Integrity in counsel and delivery",
+      "Confidential, professional data handling",
+      "Honest scope without overselling",
+      "Stewardship over shortcuts",
+    ],
+    icon: "handHeart",
+    accent: {
+      iconBg: "bg-emerald-100",
+      iconColor: "text-emerald-700",
+      ring: "ring-emerald-200/80",
+      gradient: "from-emerald-500/10 via-transparent to-transparent",
+    },
+  },
   {
     title: "Practical Innovation",
     body: "We build systems that work in real operations, not just in presentations.",
@@ -48,25 +70,14 @@ export const CORE_VALUES: ValueItem[] = [
     },
   },
   {
-    title: "Integrity and Trust",
-    body: "Client processes and data are handled with confidentiality and professionalism.",
-    icon: "handshake",
+    title: "Long-Term Partnership",
+    body: "We support clients beyond launch through structured continuous improvement.",
+    icon: "building",
     accent: {
-      iconBg: "bg-emerald-100",
-      iconColor: "text-emerald-700",
-      ring: "ring-emerald-200/80",
-      gradient: "from-emerald-500/10 via-transparent to-transparent",
-    },
-  },
-  {
-    title: "Reliability by Design",
-    body: "Maintainability, documentation, and continuity are built in from day one.",
-    icon: "badgeCheck",
-    accent: {
-      iconBg: "bg-indigo-100",
-      iconColor: "text-indigo-700",
-      ring: "ring-indigo-200/80",
-      gradient: "from-indigo-500/10 via-transparent to-transparent",
+      iconBg: "bg-amber-100",
+      iconColor: "text-amber-700",
+      ring: "ring-amber-200/80",
+      gradient: "from-amber-500/10 via-transparent to-transparent",
     },
   },
   {
@@ -81,14 +92,14 @@ export const CORE_VALUES: ValueItem[] = [
     },
   },
   {
-    title: "Long-Term Partnership",
-    body: "We support clients beyond launch through structured continuous improvement.",
-    icon: "building",
+    title: "Reliability by Design",
+    body: "Maintainability, documentation, and continuity are built in from day one.",
+    icon: "badgeCheck",
     accent: {
-      iconBg: "bg-amber-100",
-      iconColor: "text-amber-700",
-      ring: "ring-amber-200/80",
-      gradient: "from-amber-500/10 via-transparent to-transparent",
+      iconBg: "bg-indigo-100",
+      iconColor: "text-indigo-700",
+      ring: "ring-indigo-200/80",
+      gradient: "from-indigo-500/10 via-transparent to-transparent",
     },
   },
 ];
@@ -100,6 +111,8 @@ type ValueCardProps = {
   icon: ValueIcon;
   accent: ValueAccent;
   featured?: boolean;
+  detail?: string;
+  highlights?: readonly string[];
 };
 
 export function ValueCard({
@@ -109,6 +122,8 @@ export function ValueCard({
   icon,
   accent,
   featured = false,
+  detail,
+  highlights,
 }: ValueCardProps) {
   const Icon = ICON_MAP[icon] as LucideIcon;
   const ref = useRef<HTMLElement | null>(null);
@@ -141,8 +156,8 @@ export function ValueCard({
     <article
       ref={ref}
       className={cn(
-        "group relative h-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm transition-shadow duration-300 hover:shadow-md sm:p-7",
-        featured && "flex flex-col justify-between lg:p-8",
+        "group relative h-full min-h-0 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm transition-shadow duration-300 hover:shadow-md sm:p-7",
+        featured && "flex flex-col justify-between lg:p-7",
       )}
       style={{
         opacity: visible ? 1 : 0,
@@ -164,11 +179,17 @@ export function ValueCard({
         aria-hidden="true"
       />
 
-      <div className="relative">
-        <div className="mb-5 flex items-start justify-between gap-3">
+      <div className={cn("relative", featured && "flex min-h-0 flex-1 flex-col")}>
+        <div
+          className={cn(
+            "flex items-start justify-between gap-3",
+            featured ? "mb-4" : "mb-5",
+          )}
+        >
           <div
             className={cn(
-              "inline-flex size-12 items-center justify-center rounded-xl ring-1 transition-transform duration-300 group-hover:scale-105",
+              "inline-flex items-center justify-center rounded-xl ring-1 transition-transform duration-300 group-hover:scale-105",
+              featured ? "size-11" : "size-12",
               accent.iconBg,
               accent.ring,
             )}
@@ -185,8 +206,8 @@ export function ValueCard({
 
         <h3
           className={cn(
-            "mb-2 font-semibold text-[var(--foreground)]",
-            featured ? "font-display text-xl sm:text-2xl" : "text-lg",
+            "mb-1.5 font-semibold text-[var(--foreground)]",
+            featured ? "font-display text-xl leading-tight" : "mb-2 text-lg",
           )}
         >
           {title}
@@ -194,15 +215,36 @@ export function ValueCard({
         <p
           className={cn(
             "leading-relaxed text-[var(--muted)]",
-            featured ? "text-sm sm:text-base" : "text-sm",
+            featured ? "text-sm leading-snug" : "text-sm",
           )}
         >
           {body}
         </p>
+
+        {featured && detail && (
+          <p className="mt-2 text-sm leading-snug text-[var(--muted)]/90">{detail}</p>
+        )}
+
+        {featured && highlights && highlights.length > 0 && (
+          <ul
+            className="mt-3 grid gap-x-2 gap-y-1.5 sm:grid-cols-2"
+            aria-label={`How ${title} shows up in every engagement`}
+          >
+            {highlights.map((item) => (
+              <li key={item} className="flex items-start gap-1.5 text-xs leading-snug text-[var(--muted)]">
+                <CheckCircle2
+                  className={cn("mt-0.5 size-3.5 shrink-0", accent.iconColor)}
+                  aria-hidden="true"
+                />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       {featured && (
-        <p className="relative mt-8 border-t border-[var(--border)]/80 pt-5 text-xs font-medium uppercase tracking-[0.18em] text-[var(--primary)]">
+        <p className="relative mt-5 shrink-0 border-t border-[var(--border)]/80 pt-4 text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-[var(--primary)]">
           Foundation of every engagement
         </p>
       )}
@@ -214,19 +256,21 @@ export function ValuesGrid() {
   const [featured, ...supporting] = CORE_VALUES;
 
   return (
-    <div className="grid gap-4 sm:gap-5 lg:grid-cols-12 lg:grid-rows-2">
-      <div className="lg:col-span-5 lg:row-span-2">
+    <div className="grid gap-4 sm:gap-5 lg:grid-cols-12 lg:grid-rows-2 lg:items-stretch">
+      <div className="h-full min-h-0 lg:col-span-5 lg:row-span-2">
         <ValueCard
           index={0}
           title={featured.title}
           body={featured.body}
           icon={featured.icon}
           accent={featured.accent}
+          detail={featured.detail}
+          highlights={featured.highlights}
           featured
         />
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:grid-cols-2 lg:content-start">
+      <div className="grid h-full min-h-0 gap-4 sm:grid-cols-2 sm:gap-5 lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:grid-cols-2 lg:grid-rows-2 lg:items-stretch">
         {supporting.map((value, index) => (
           <ValueCard
             key={value.title}
