@@ -60,8 +60,15 @@ export function FeatureStoryCard({
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const [clickedOpen, setClickedOpen] = useState(false);
-  const expanded = hovered || clickedOpen;
+  const [pin, setPin] = useState<"open" | "closed" | null>(null);
+  const expanded = pin === "open" || (pin === null && hovered);
+
+  const toggleExpanded = () => {
+    setPin((current) => {
+      const isExpanded = current === "open" || (current === null && hovered);
+      return isExpanded ? "closed" : "open";
+    });
+  };
 
   useEffect(() => {
     const element = ref.current;
@@ -95,12 +102,15 @@ export function FeatureStoryCard({
       aria-expanded={expanded}
       aria-label={`${title}. ${description}`}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onClick={() => setClickedOpen((open) => !open)}
+      onMouseLeave={() => {
+        setHovered(false);
+        setPin(null);
+      }}
+      onClick={toggleExpanded}
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          setClickedOpen((open) => !open);
+          toggleExpanded();
         }
       }}
       className={cn(
