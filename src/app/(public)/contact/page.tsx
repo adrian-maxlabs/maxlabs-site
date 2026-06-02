@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { ContactInquiryForm } from "@/features/inquiries/components/ContactInquiryForm";
 import { CONTACT_EMAIL, CONTACT_PHONES, phoneToTelHref } from "@/lib/contact-info";
+import { LandingDotField } from "../landing-dot-field";
 
 export const metadata: Metadata = {
   title: "Contact MAXLABS | Request a Consultation",
@@ -35,8 +36,10 @@ export default function ContactPage() {
         </div>
       </header>
 
-      <main className="flex-1">
-        <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6 lg:px-10">
+      <main className="relative flex-1">
+        <LandingDotField />
+
+        <div className="relative mx-auto max-w-6xl px-4 pt-6 sm:px-6 lg:px-10">
           <Link
             href="/"
             className="inline-flex items-center gap-2 rounded-lg p-1 text-sm font-medium text-[var(--primary)] hover:bg-[var(--accent-subtle)]"
@@ -46,7 +49,7 @@ export default function ContactPage() {
           </Link>
         </div>
 
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-6 sm:px-6 sm:py-10 lg:grid-cols-[1fr_2fr] lg:gap-14 lg:px-10 lg:py-14">
+        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-6 sm:px-6 sm:py-10 lg:grid-cols-[1fr_2fr] lg:gap-14 lg:px-10 lg:py-14">
           <aside>
             <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-[var(--primary)]">
               Let us build with you

@@ -1,21 +1,6 @@
 import Link from "next/link";
 import { MaxlabsLogo } from "@/components/brand/MaxlabsLogo";
-import { CONTACT_EMAIL, CONTACT_PHONES, TAX_CLASSIFICATION } from "@/lib/contact-info";
-
-function ContactDetails() {
-  return (
-    <div className="space-y-1 text-sm text-[var(--footer-muted)]">
-      <p>Phone:</p>
-      <ul className="list-disc space-y-0.5 pl-5">
-        {CONTACT_PHONES.map((phone) => (
-          <li key={phone}>{phone}</li>
-        ))}
-      </ul>
-      <p>Email: {CONTACT_EMAIL}</p>
-      <p>Tax Classification: {TAX_CLASSIFICATION}</p>
-    </div>
-  );
-}
+import { FooterCallingCard } from "./FooterCallingCard";
 
 const QUICK_LINKS = [
   { label: "About", href: "/#about" },
@@ -54,12 +39,7 @@ export function SiteFooter() {
             ))}
           </ul>
         </div>
-        <div>
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--footer-foreground)]">
-            Business Information
-          </h3>
-          <ContactDetails />
-        </div>
+        <FooterCallingCard />
       </div>
       <div className="mx-auto mt-8 max-w-6xl border-t border-[var(--footer-divider)] pt-4 text-center text-xs text-[var(--footer-subtle)]">
         © {new Date().getFullYear()} MAXLABS I.T. SOLUTIONS. All rights reserved.
