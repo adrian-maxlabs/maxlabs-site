@@ -10,9 +10,9 @@ type TrustStat = {
 };
 
 const TRUST_STATS: TrustStat[] = [
-  { icon: Layers, value: "6", label: "Service Areas", href: "#services" },
+  { icon: Layers, value: "9", label: "Service Areas", href: "#services" },
   { icon: Route, value: "5", label: "Delivery Stages", href: "#process" },
-  { icon: Building2, value: "PH", label: "SME Focus", href: "#about" },
+  { icon: Building2, value: "PH-Based", label: "Growth-Stage", href: "#about" },
 ];
 
 function TrustStatItem({ icon: Icon, value, label, href }: TrustStat) {

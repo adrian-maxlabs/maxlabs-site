@@ -121,36 +121,60 @@ export default function LandingPage() {
               title="Services and Capabilities"
               subtitle="Modular services that can be delivered end-to-end or phased based on business priorities."
             />
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <FeatureStoryCard
+                icon="landingPages"
+                title="Website Landing Pages"
+                description="Conversion-focused pages that communicate your offer clearly and turn visitors into qualified leads."
+                longDescription="Craft fast, responsive landing experiences with clear messaging, trust signals, and strong calls to action—optimized for discovery, credibility, and inquiry capture from day one."
+              />
               <FeatureStoryCard
                 icon="customApp"
                 title="Custom Web Application Development"
                 description="Tailored systems for operations, administration, and service delivery needs."
+                longDescription="We design and build bespoke web platforms around your workflows—from enrollment and scheduling to internal admin tools—so teams spend less time on spreadsheets and more time serving customers."
               />
               <FeatureStoryCard
-                icon="automation"
-                title="Workflow Automation"
-                description="Automated approvals, task routing, and notifications to remove repetitive overhead."
-              />
-              <FeatureStoryCard
-                icon="consulting"
-                title="Business Digitalization Consulting"
-                description="Workflow assessment, bottleneck analysis, and practical digital transition planning."
-              />
-              <FeatureStoryCard
-                icon="crmErp"
-                title="CRM/ERP and Internal Systems"
-                description="Role-based business modules for records, transactions, and accountable workflows."
-              />
-              <FeatureStoryCard
-                icon="analytics"
-                title="Dashboards and Reporting"
-                description="Decision-ready visibility across key functions through practical data views."
+                icon="mobileApps"
+                title="Mobile Applications"
+                description="Cross-platform apps for customers and field teams, built for real-world usage and connectivity."
+                longDescription="Ship iOS and Android experiences tailored to how your users work—whether self-service for customers or offline-capable tools for field staff—with secure sync back to your core systems."
               />
               <FeatureStoryCard
                 icon="cloud"
                 title="Cloud and Integration Services"
                 description="Cloud-ready architecture with API and third-party integration support."
+                longDescription="Deploy on reliable cloud infrastructure with secure APIs and third-party connectors so your systems share data cleanly, scale with demand, and stay maintainable as integrations grow."
+              />
+              <FeatureStoryCard
+                icon="analytics"
+                title="Dashboards and Reporting"
+                description="Decision-ready visibility across key functions through practical data views."
+                longDescription="Build focused dashboards that surface the metrics leadership and operations teams need—filtered by branch, period, or role—without wading through raw exports or disconnected reports."
+              />
+              <FeatureStoryCard
+                icon="automation"
+                title="Workflow Automation"
+                description="Automated approvals, task routing, and notifications to remove repetitive overhead."
+                longDescription="Map repetitive handoffs into reliable automated flows with clear ownership, status tracking, and alerts—reducing delays, missed steps, and manual follow-ups across departments."
+              />
+              <FeatureStoryCard
+                icon="crmErp"
+                title="CRM/ERP and Internal Systems"
+                description="Role-based business modules for records, transactions, and accountable workflows."
+                longDescription="Centralize customer records, transactions, and operational data in role-aware modules so every handoff is traceable, auditable, and accessible to the right people at the right time."
+              />
+              <FeatureStoryCard
+                icon="securityAudits"
+                title="Security Audits"
+                description="Structured review of access, data handling, and infrastructure with prioritized remediation guidance."
+                longDescription="Evaluate authentication, permissions, data storage, and deployment practices against practical risk scenarios, then receive a prioritized action plan to close gaps before they become incidents."
+              />
+              <FeatureStoryCard
+                icon="consulting"
+                title="Business Digitalization Consulting"
+                description="Workflow assessment, bottleneck analysis, and practical digital transition planning."
+                longDescription="We assess how work actually moves through your organization, identify friction points, and deliver a phased roadmap to digitize processes without disrupting day-to-day operations."
               />
             </div>
           </div>
