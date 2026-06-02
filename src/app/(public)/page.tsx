@@ -10,6 +10,7 @@ import { HeroLoopBackground } from "./hero-loop-background";
 import { HeroTrustBar } from "./hero-trust-bar";
 import { HeroVisualShowcase } from "./hero-visual-showcase";
 import { LandingHashSync } from "./landing-hash-sync";
+import { CircleExpandButton } from "@/components/ui/circle-expand-button";
 import { LandingNavMenu } from "./landing-nav-menu";
 import { AboutSection } from "./about-section";
 import { ProjectsSection } from "./projects-section";
@@ -49,12 +50,7 @@ export default function LandingPage() {
 
           <div className="hidden items-center justify-end gap-3 justify-self-end lg:flex">
             <ThemeToggle />
-            <Link
-              href="/contact"
-              className="inline-flex h-10 items-center justify-center rounded-lg bg-[var(--primary)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--primary-hover)]"
-            >
-              Start Your Project
-            </Link>
+            <CircleExpandButton href="/contact">Start Your Project</CircleExpandButton>
           </div>
         </nav>
       </header>
