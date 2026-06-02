@@ -5,9 +5,25 @@ import { cn } from "@/lib/utils";
 
 type LandingDotFieldProps = {
   className?: string;
+  variant?: "light" | "dark";
 };
 
-export function LandingDotField({ className }: LandingDotFieldProps) {
+const VARIANTS = {
+  light: {
+    dotAlpha: 0.35,
+    linkAlpha: 0.12,
+  },
+  dark: {
+    dotColor: "#94a3b8",
+    linkColor: "#38bdf8",
+    dotAlpha: 0.4,
+    linkAlpha: 0.16,
+  },
+} as const;
+
+export function LandingDotField({ className, variant = "light" }: LandingDotFieldProps) {
+  const colors = VARIANTS[variant];
+
   return (
     <DotFieldBackground
       className={cn("z-0", className)}
@@ -18,8 +34,10 @@ export function LandingDotField({ className }: LandingDotFieldProps) {
       repelRadius={120}
       repelStrength={2.5}
       cursorEase={0.04}
-      dotAlpha={0.35}
-      linkAlpha={0.12}
+      dotAlpha={colors.dotAlpha}
+      linkAlpha={colors.linkAlpha}
+      dotColor={"dotColor" in colors ? colors.dotColor : undefined}
+      linkColor={"linkColor" in colors ? colors.linkColor : undefined}
       interaction="repel"
       maxDots={90}
     />

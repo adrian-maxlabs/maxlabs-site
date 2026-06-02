@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight } from "lucide-react";
 import { MaxlabsBrandLockup } from "@/components/brand/MaxlabsBrandLockup";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
@@ -199,13 +198,7 @@ export default function LandingPage() {
             <p className="mb-6 text-sm text-[var(--muted)] sm:text-base">
               Start with a practical consultation focused on your current workflows and target outcomes.
             </p>
-            <Link
-              href="/contact"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[var(--primary)] px-6 text-sm font-semibold text-white transition-colors hover:bg-[var(--primary-hover)]"
-            >
-              Talk to MAXLABS
-              <ArrowRight className="ml-2 size-4" aria-hidden="true" />
-            </Link>
+            <CircleExpandButton href="/contact">Talk to MAXLABS</CircleExpandButton>
             </div>
           </div>
         </section>

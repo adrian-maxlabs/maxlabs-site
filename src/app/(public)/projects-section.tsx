@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { LandingDotField } from "./landing-dot-field";
 
 type ProjectStatus = "In Progress" | "Completed" | "Discovery";
 
@@ -244,10 +245,11 @@ export function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="scroll-mt-[5.5rem] border-t border-[var(--border)] bg-[#0f172a] px-4 py-10 text-slate-100 sm:px-6 sm:py-14 lg:px-10"
+      className="relative scroll-mt-[5.5rem] border-t border-[var(--border)] bg-[#0f172a] px-4 py-10 text-slate-100 sm:px-6 sm:py-14 lg:px-10"
       aria-labelledby="projects-heading"
     >
-      <div className="mx-auto max-w-6xl">
+      <LandingDotField variant="dark" />
+      <div className="relative mx-auto max-w-6xl">
         <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">
