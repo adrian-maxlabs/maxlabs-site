@@ -13,7 +13,7 @@ const QUICK_LINKS = [
 export function SiteFooter() {
   return (
     <footer className="border-t border-[var(--footer-border)] bg-[var(--footer)] px-4 py-8 sm:px-6 lg:px-10">
-      <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
+      <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3 md:items-start">
         <div>
           <div className="mb-3 flex items-center gap-2">
             <MaxlabsLogo maxHeight={32} />

@@ -1,99 +1,121 @@
 import Image from "next/image";
 import { HERO_BRAND } from "@/app/(public)/hero-brand-colors";
+import { MAXLABS_SERVICE_AREAS, MAXLABS_TAGLINE } from "@/lib/brand-messaging";
 import {
-  CONTACT_EMAIL,
+  CONTACT_EMAILS,
   CONTACT_PHONES,
   TAX_CLASSIFICATION,
 } from "@/lib/contact-info";
 
-/** US standard business card — 3.5" × 2" (print-ready). */
+/** Fills daisyUI `hover-3d` first child; border applied via `.maxlabs-hover-3d > :first-child`. */
 export const BUSINESS_CARD_CLASS =
-  "maxlabs-calling-card card h-[2in] w-[3.5in] min-h-[2in] max-h-[2in] min-w-[3.5in] max-w-[3.5in] shrink-0 border border-white/12 text-white shadow-2xl shadow-slate-950/40 bg-[#081224] bg-[radial-gradient(circle_at_bottom_left,#ffffff04_35%,transparent_36%),radial-gradient(circle_at_top_right,#ffffff04_35%,transparent_36%)] bg-size-[3.2em_3.2em]";
-
-const CORE_SERVICES_LINE = "Web Apps · Automation · CRM/ERP · Cloud · Dashboards";
+  "maxlabs-calling-card card h-full w-full min-h-0 min-w-0 overflow-hidden rounded-[0.85rem] border-0 bg-transparent p-0 shadow-none";
 
 /**
- * Branded calling card — first child of daisyUI `hover-3d`.
+ * Footer calling card — scales up on screen, prints at 3.5″ × 2″.
  * @see https://daisyui.com/components/hover-3d/
  */
 export function MaxlabsCallingCard() {
   return (
     <div className={BUSINESS_CARD_CLASS}>
-      <div className="card-body relative grid h-full min-h-0 grid-rows-[auto_1fr] !gap-0 !p-[0.14in]">
+      <div className="relative flex h-full min-h-0 flex-col p-[0.1in] pb-[0.12in]">
         <div
-          className="pointer-events-none absolute inset-0 opacity-90"
+          className="pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
-            background: `linear-gradient(135deg, ${HERO_BRAND.baseFrom} 0%, ${HERO_BRAND.baseMid} 42%, ${HERO_BRAND.baseTo} 100%)`,
+            background: `linear-gradient(145deg, ${HERO_BRAND.baseFrom} 0%, ${HERO_BRAND.baseMid} 50%, ${HERO_BRAND.baseTo} 100%)`,
           }}
           aria-hidden="true"
         />
         <div
-          className="pointer-events-none absolute -right-8 -top-8 size-20 rounded-full opacity-40 blur-2xl"
-          style={{ background: `radial-gradient(circle, ${HERO_BRAND.sky}55, transparent 70%)` }}
+          className="pointer-events-none absolute inset-0 rounded-[inherit] bg-[radial-gradient(circle_at_bottom_left,#ffffff06_35%,transparent_36%),radial-gradient(circle_at_top_right,#ffffff06_35%,transparent_36%)] bg-size-[2.8em_2.8em]"
           aria-hidden="true"
         />
 
-        <header className="relative flex items-center gap-2.5 border-b border-white/10 pb-[0.1in]">
-          <div className="relative size-8 shrink-0 overflow-hidden rounded-md bg-white/95 p-0.5 shadow-sm">
+        <header className="relative flex shrink-0 items-center justify-center gap-[0.06in] border-b border-white/10 pb-[0.06in]">
+          <div className="relative size-[0.26in] shrink-0 overflow-hidden rounded bg-white/95 p-0.5 shadow-sm">
             <Image
               src="/brand/maxlabs-logo-mark.png"
               alt=""
-              width={28}
-              height={20}
+              width={26}
+              height={19}
               unoptimized
               className="size-full object-contain"
             />
           </div>
-          <div className="min-w-0 leading-tight">
-            <p className="font-display text-[11pt] font-bold tracking-tight">
-              <span className="text-white">MAX</span>
-              <span className="bg-gradient-to-r from-[#38bdf8] via-[#60a5fa] to-[#7928CA] bg-clip-text text-transparent">
-                LABS
-              </span>
-            </p>
-            <p className="text-[7pt] font-semibold uppercase tracking-[0.12em] text-slate-300">
-              I.T. SOLUTIONS
-            </p>
-          </div>
+          <p className="font-display text-[10pt] font-bold leading-none tracking-tight whitespace-nowrap">
+            <span className="text-white">MAX</span>
+            <span className="bg-gradient-to-r from-[#38bdf8] to-[#7928CA] bg-clip-text text-transparent">
+              LABS
+            </span>
+            <span className="text-[6.5pt] font-semibold uppercase tracking-[0.08em] text-slate-300">
+              {" "}
+              I.T SOLUTIONS
+            </span>
+          </p>
         </header>
 
-        <div className="relative grid min-h-0 flex-1 grid-cols-[1.15fr_0.85fr] gap-x-[0.12in] pt-[0.1in]">
-          <div className="flex min-h-0 flex-col justify-between gap-[0.08in]">
-            <p className="text-[7.5pt] font-medium leading-snug text-sky-100">
-              We maximize SMEs with software that fits how you actually work.
+        <p className="relative mt-[0.05in] shrink-0 border-y border-sky-400/25 bg-sky-950/30 py-[0.04in] text-center font-display text-[7pt] font-bold uppercase leading-[1.15] tracking-[0.03em] text-sky-200">
+          {MAXLABS_TAGLINE}
+        </p>
+
+        <div className="relative mt-[0.05in] grid min-h-0 flex-1 grid-cols-[1.05fr_0.95fr] gap-[0.08in]">
+          <div className="flex min-h-0 flex-col">
+            <p className="text-[6.5pt] font-bold uppercase tracking-[0.1em] text-slate-400">
+              Service areas
             </p>
-            <div>
-              <p className="text-[6.5pt] font-semibold uppercase tracking-[0.1em] text-slate-400">
-                Core capabilities
-              </p>
-              <p className="mt-[0.04in] text-[7pt] leading-snug text-slate-200">
-                {CORE_SERVICES_LINE}
-              </p>
-            </div>
-            <p className="text-[8pt] font-semibold leading-none text-sky-300">
-              Let&apos;s build what matters.
-            </p>
+            <ul className="mt-[0.03in] flex flex-1 flex-col justify-between gap-[0.02in] leading-[1.2]">
+              {MAXLABS_SERVICE_AREAS.map((area) => (
+                <li
+                  key={area}
+                  className="flex items-start gap-[0.05in] text-[7pt] text-slate-100"
+                >
+                  <span
+                    className="mt-[0.03in] size-[0.05in] shrink-0 rounded-full bg-sky-400"
+                    aria-hidden="true"
+                  />
+                  <span>{area}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className="flex min-h-0 flex-col justify-between border-l border-white/10 pl-[0.1in] text-[7.5pt] leading-snug text-slate-200">
-            <div className="space-y-[0.05in] tabular-nums">
-              {CONTACT_PHONES.map((phone) => (
-                <p key={phone} className="font-medium text-white/95">
-                  {phone}
-                </p>
-              ))}
-            </div>
-            <div className="space-y-[0.04in]">
-              <p className="break-all font-mono text-[6.5pt] leading-tight text-slate-300">
-                {CONTACT_EMAIL}
+          <div className="flex min-h-0 flex-col justify-between rounded-sm border border-white/12 bg-black/20 px-[0.06in] py-[0.05in]">
+            <div className="leading-[1.25]">
+              <p className="text-[6.5pt] font-bold uppercase tracking-[0.1em] text-sky-400">
+                Email
               </p>
-              <p className="text-[6pt] leading-tight text-slate-400">{TAX_CLASSIFICATION}</p>
+              <ul className="mt-[0.04in] space-y-[0.035in] font-mono">
+                {CONTACT_EMAILS.map((email, index) => (
+                  <li
+                    key={email}
+                    className={
+                      index === 0
+                        ? "text-[8pt] font-semibold leading-[1.15] text-white"
+                        : "text-[7.25pt] leading-[1.15] text-slate-100"
+                    }
+                  >
+                    {email}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="mt-[0.05in] border-t border-white/10 pt-[0.04in] leading-[1.25]">
+              <p className="text-[6.5pt] font-bold uppercase tracking-[0.1em] text-slate-500">
+                Phone
+              </p>
+              <p className="mt-[0.025in] text-[5.75pt] tabular-nums leading-[1.2] text-slate-300">
+                {CONTACT_PHONES.join(" / ")}
+              </p>
             </div>
           </div>
         </div>
 
+        <p className="relative mt-[0.04in] shrink-0 whitespace-nowrap border-t border-white/10 pt-[0.035in] text-center text-[6.5pt] font-medium leading-none text-slate-300">
+          {TAX_CLASSIFICATION}
+        </p>
+
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-[#1d4ed8] via-[#38bdf8] to-[#7928CA]"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-[#1d4ed8] via-[#38bdf8] to-[#7928CA]"
           aria-hidden="true"
         />
       </div>

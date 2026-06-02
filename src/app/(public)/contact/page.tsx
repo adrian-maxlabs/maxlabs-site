@@ -5,7 +5,7 @@ import { MaxlabsBrandLockup } from "@/components/brand/MaxlabsBrandLockup";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { ContactInquiryForm } from "@/features/inquiries/components/ContactInquiryForm";
-import { CONTACT_EMAIL, CONTACT_PHONES, phoneToTelHref } from "@/lib/contact-info";
+import { CONTACT_EMAILS, CONTACT_PHONES, phoneToTelHref } from "@/lib/contact-info";
 import { LandingDotField } from "../landing-dot-field";
 
 export const metadata: Metadata = {
@@ -73,13 +73,25 @@ export default function ContactPage() {
 
             <div className="mt-8 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
               <p className="text-sm text-[var(--muted)]">Prefer direct contact?</p>
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="mt-1 block text-sm font-medium text-[var(--primary)] hover:underline"
-              >
-                {CONTACT_EMAIL}
-              </a>
-              <ul className="mt-1 list-disc space-y-0.5 pl-5">
+              <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-[var(--foreground)]">
+                Email
+              </p>
+              <ul className="mt-1.5 space-y-1.5">
+                {CONTACT_EMAILS.map((email) => (
+                  <li key={email}>
+                    <a
+                      href={`mailto:${email}`}
+                      className="text-sm font-medium text-[var(--primary)] hover:underline"
+                    >
+                      {email}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-[var(--foreground)]">
+                Phone
+              </p>
+              <ul className="mt-1.5 list-disc space-y-1 pl-5">
                 {CONTACT_PHONES.map((phone) => (
                   <li key={phone}>
                     <a
