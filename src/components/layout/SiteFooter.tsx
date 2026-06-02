@@ -35,7 +35,8 @@ export function SiteFooter() {
           </div>
 
           <p className="max-w-sm text-sm leading-relaxed text-[var(--footer-muted)]">
-            Philippine-based technology partner for SMEs and growth-stage teams. We build
+            Philippine-based technology partner for small and medium businesses and growth-stage
+            teams. We build
             practical software—digitalization, automation, and scalable systems—that reduce
             manual overhead and improve decision speed.
           </p>

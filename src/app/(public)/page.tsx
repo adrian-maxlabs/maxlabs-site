@@ -81,8 +81,9 @@ export default function LandingPage() {
                 </span>
               </h1>
               <p className="mt-6 max-w-3xl text-sm leading-relaxed text-slate-200 sm:text-base md:text-lg">
-                We design and implement practical software systems that simplify operations,
-                reduce manual overhead, and improve decision speed for SMEs and growth-stage teams.
+                We build scalable, AI-powered apps and practical software systems that streamline
+                operations, reduce manual work, help Small-to-Medium businesses and 
+                growth-stage teams make faster, clearer decisions.
               </p>
 
               <div className="mt-8 flex w-full max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row lg:justify-start">
