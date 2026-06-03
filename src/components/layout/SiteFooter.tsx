@@ -2,7 +2,6 @@ import Link from "next/link";
 import { MaxlabsLogo } from "@/components/brand/MaxlabsLogo";
 import { MAXLABS_TAGLINE } from "@/lib/brand-messaging";
 import { FooterCallingCard } from "./FooterCallingCard";
-import { FooterSocialIcons } from "./footer-social-icons";
 
 const QUICK_LINKS = [
   { label: "About", href: "/#about" },
@@ -63,16 +62,10 @@ export function SiteFooter() {
         <FooterCallingCard />
       </div>
 
-      <div className="mx-auto mt-10 flex max-w-6xl flex-col items-center gap-4 border-t border-[var(--footer-divider)] pt-5 text-xs text-[var(--footer-subtle)] sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-center sm:text-left">
+      <div className="mx-auto mt-10 max-w-6xl border-t border-[var(--footer-divider)] pt-5 text-center text-xs text-[var(--footer-subtle)]">
+        <p>
           © {new Date().getFullYear()} MAXLABS I.T. SOLUTIONS. All rights reserved.
         </p>
-        <div className="flex items-center gap-2.5">
-          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--footer-foreground)]">
-            Follow Us
-          </span>
-          <FooterSocialIcons />
-        </div>
       </div>
     </footer>
   );
