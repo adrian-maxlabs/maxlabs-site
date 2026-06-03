@@ -1,10 +1,13 @@
 export type InquiryServiceInterest =
-  | "digitalization"
-  | "automation"
+  | "landing_pages"
   | "custom_web_app"
-  | "crm_erp"
-  | "dashboards"
+  | "mobile_apps"
   | "cloud_integration"
+  | "dashboards"
+  | "automation"
+  | "crm_erp"
+  | "security_audits"
+  | "digitalization"
   | "support"
   | "other";
 

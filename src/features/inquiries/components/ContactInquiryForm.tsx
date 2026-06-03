@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { submitInquiryAction } from "@/features/inquiries/actions/submit-inquiry";
-import type { InquiryFormState } from "@/features/inquiries/types";
+import { INQUIRY_SERVICE_OPTIONS, type InquiryFormState } from "@/features/inquiries/types";
 
 const INITIAL_STATE: InquiryFormState = {};
 
@@ -77,14 +77,11 @@ export function ContactInquiryForm() {
             <option value="" disabled>
               Select one
             </option>
-            <option value="digitalization">Business Digitalization Consulting</option>
-            <option value="automation">Workflow Automation</option>
-            <option value="custom_web_app">Custom Web Application Development</option>
-            <option value="crm_erp">CRM / ERP Systems</option>
-            <option value="dashboards">Dashboards and Reporting</option>
-            <option value="cloud_integration">Cloud and Integration Services</option>
-            <option value="support">Support and Continuous Improvement</option>
-            <option value="other">Other</option>
+            {INQUIRY_SERVICE_OPTIONS.map(({ value, label }) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
           </select>
           {fieldError(state, "service_interest") ? (
             <p className="mt-1 text-xs text-red-600 dark:text-red-400">
