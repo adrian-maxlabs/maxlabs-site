@@ -28,10 +28,6 @@ export const metadata: Metadata = {
   title: "MAXLABS I.T SOLUTIONS",
   description:
     "MAXLABS I.T. SOLUTIONS helps businesses maximize performance through practical digitalization, automation, and scalable technology implementation.",
-  icons: {
-    icon: "/brand/maxlabs-logo-mark.png",
-    apple: "/brand/maxlabs-logo-mark.png",
-  },
 };
 
 export default function RootLayout({
