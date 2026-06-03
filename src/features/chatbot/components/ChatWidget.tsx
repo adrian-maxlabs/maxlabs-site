@@ -113,7 +113,7 @@ export function ChatWidget() {
 
       <div
         className={cn(
-          "fixed z-[60] flex flex-col items-end gap-3",
+          "pointer-events-none fixed z-[60] flex flex-col items-end gap-3",
           "bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))]",
           "sm:bottom-6 sm:right-6",
         )}
@@ -128,9 +128,9 @@ export function ChatWidget() {
             "origin-bottom-right transition-all duration-300 ease-out",
             open
               ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
-              : "pointer-events-none translate-y-4 scale-95 opacity-0",
+              : "pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0",
           )}
-          style={{ maxHeight: "min(32rem, calc(100svh - 6rem))" }}
+          style={open ? { maxHeight: "min(32rem, calc(100svh - 6rem))" } : undefined}
         >
           <header className="flex items-center justify-between gap-3 border-b border-[var(--border)] bg-[var(--card)] px-4 py-3">
             <div className="flex min-w-0 items-center gap-2.5">
@@ -361,7 +361,7 @@ export function ChatWidget() {
           aria-controls="maxlabs-chat-panel"
           aria-label={open ? "Close MAX" : "Chat with MAX"}
           className={cn(
-            "group relative inline-flex size-14 items-center justify-center rounded-full shadow-lg transition-all duration-300",
+            "pointer-events-auto group relative inline-flex size-14 items-center justify-center rounded-full shadow-lg transition-all duration-300",
             "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)]",
             open
               ? "bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] hover:shadow-xl"

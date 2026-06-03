@@ -17,7 +17,7 @@ export function FooterCallingCard() {
   ].join(". ");
 
   return (
-    <div className="flex w-full min-w-0 flex-col items-center p-2 md:items-end">
+    <div className="flex w-full min-w-0 flex-col items-center p-2 pb-[5.5rem] sm:pb-24 md:mr-[5rem] md:items-end">
       <Link
         href="/contact"
         className="hover-3d maxlabs-hover-3d w-full min-w-0 max-w-full cursor-pointer rounded-[0.85rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--footer-accent)]"

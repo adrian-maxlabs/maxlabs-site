@@ -9,7 +9,7 @@ import {
 
 /** Fills daisyUI `hover-3d` first child; border applied via `.maxlabs-hover-3d > :first-child`. */
 export const BUSINESS_CARD_CLASS =
-  "maxlabs-calling-card card h-full w-full min-h-0 min-w-0 overflow-hidden rounded-[0.85rem] border-0 bg-transparent p-0 shadow-none";
+  "maxlabs-calling-card card h-full w-full min-h-0 min-w-0 border-0 bg-transparent p-0 shadow-none";
 
 /**
  * Footer calling card — scales up on screen, prints at 3.5″ × 2″.
@@ -18,7 +18,7 @@ export const BUSINESS_CARD_CLASS =
 export function MaxlabsCallingCard() {
   return (
     <div className={BUSINESS_CARD_CLASS}>
-      <div className="relative flex h-full min-h-0 flex-col p-[0.1in] pb-[0.12in]">
+      <div className="relative flex h-full min-h-0 flex-col overflow-hidden rounded-[0.85rem] p-[0.1in] pb-[0.12in]">
         <div
           className="pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
