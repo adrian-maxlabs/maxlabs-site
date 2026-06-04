@@ -113,9 +113,12 @@ export function ChatWidget() {
 
       <div
         className={cn(
-          "pointer-events-none fixed z-[60] flex flex-col items-end gap-3",
-          "bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))]",
-          "sm:bottom-6 sm:right-6",
+          "pointer-events-none fixed z-[60] box-border flex max-w-full flex-col gap-3",
+          "bottom-[max(1rem,env(safe-area-inset-bottom))] sm:bottom-6",
+          // Mobile: stay inside the same horizontal gutters as page content (px-4)
+          "left-[max(1rem,env(safe-area-inset-left))] right-[max(1rem,env(safe-area-inset-right))]",
+          open ? "items-stretch" : "items-end",
+          "sm:left-auto sm:w-auto sm:max-w-none sm:right-6 sm:items-end",
         )}
       >
         <div
@@ -124,13 +127,17 @@ export function ChatWidget() {
           aria-label="MAX — MAXLABS assistant"
           aria-hidden={!open}
           className={cn(
-            "flex w-[min(100vw-2rem,24rem)] flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl shadow-slate-950/20",
+            "flex w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl shadow-slate-950/20 sm:w-96",
             "origin-bottom-right transition-all duration-300 ease-out",
             open
               ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
               : "pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0",
           )}
-          style={open ? { maxHeight: "min(32rem, calc(100svh - 6rem))" } : undefined}
+          style={
+            open
+              ? { maxHeight: "min(32rem, calc(100dvh - max(7rem, env(safe-area-inset-bottom) + 5.5rem)))" }
+              : undefined
+          }
         >
           <header className="flex items-center justify-between gap-3 border-b border-[var(--border)] bg-[var(--card)] px-4 py-3">
             <div className="flex min-w-0 items-center gap-2.5">
@@ -354,42 +361,47 @@ export function ChatWidget() {
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((prev) => !prev)}
-          aria-expanded={open}
-          aria-controls="maxlabs-chat-panel"
-          aria-label={open ? "Close MAX" : "Chat with MAX"}
-          className={cn(
-            "pointer-events-auto group relative inline-flex size-14 items-center justify-center rounded-full shadow-lg transition-all duration-300",
-            "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)]",
-            open
-              ? "bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] hover:shadow-xl"
-              : "border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--primary)]/35 hover:shadow-xl",
-          )}
-        >
-          <span
-            className={cn(
-              "absolute inset-0 rounded-full blur-md transition-opacity",
-              open
-                ? "bg-[var(--primary)] opacity-40 group-hover:opacity-60"
-                : "bg-sky-400/25 opacity-70 group-hover:opacity-90",
-            )}
-            aria-hidden="true"
-          />
-          <span className="relative flex items-center justify-center">
-            {open ? (
-              <X className="size-6" aria-hidden="true" />
-            ) : (
-              <MaxMascot size={34} glow />
-            )}
-          </span>
+        <div className="pointer-events-auto relative shrink-0 self-end">
           {!open && (
-            <span className="absolute -right-0.5 -top-0.5 flex size-3.5 items-center justify-center rounded-full bg-sky-300 ring-2 ring-[var(--background)]">
-              <span className="sr-only">MAX is available</span>
-            </span>
+            <span
+              className="pointer-events-none absolute -right-0.5 -top-0.5 z-10 size-3.5 rounded-full bg-sky-400 shadow-sm ring-2 ring-[var(--background)]"
+              aria-hidden="true"
+            />
           )}
-        </button>
+          <button
+            type="button"
+            onClick={() => setOpen((prev) => !prev)}
+            aria-expanded={open}
+            aria-controls="maxlabs-chat-panel"
+            aria-label={open ? "Close MAX" : "Chat with MAX"}
+            className={cn(
+              "group relative inline-flex size-14 items-center justify-center rounded-full shadow-lg transition-all duration-300",
+              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)]",
+              open
+                ? "bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)] hover:shadow-xl"
+                : "border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--primary)]/35 hover:shadow-xl",
+            )}
+          >
+            <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-full" aria-hidden="true">
+              <span
+                className={cn(
+                  "absolute inset-1 rounded-full blur-md transition-opacity",
+                  open
+                    ? "bg-[var(--primary)] opacity-40 group-hover:opacity-60"
+                    : "bg-sky-400/25 opacity-70 group-hover:opacity-90",
+                )}
+              />
+            </span>
+            <span className="relative flex items-center justify-center">
+              {open ? (
+                <X className="size-6" aria-hidden="true" />
+              ) : (
+                <MaxMascot size={34} glow />
+              )}
+            </span>
+            {!open && <span className="sr-only">MAX is available</span>}
+          </button>
+        </div>
       </div>
     </>
   );

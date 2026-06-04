@@ -40,9 +40,9 @@ export default function LandingPage() {
     <div className="flex min-h-screen flex-col bg-[var(--background)] font-sans">
       <LandingHashSync />
 
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--border)] bg-[var(--background)]/95 backdrop-blur-sm">
-        <nav className="mx-auto grid h-14 max-w-6xl grid-cols-[1fr_auto] items-center gap-3 px-4 sm:h-16 sm:px-6 lg:grid-cols-[1fr_auto_1fr] lg:px-10">
-          <Link href="/" className="flex min-w-0 items-center gap-2" aria-label="MAXLABS home">
+      <header className="fixed inset-x-0 top-0 z-50 overflow-x-clip border-b border-[var(--border)] bg-[var(--background)]/95 backdrop-blur-sm">
+        <nav className="mx-auto grid h-14 w-full min-w-0 max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-4 sm:h-16 sm:gap-3 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-10">
+          <Link href="/" className="flex min-w-0 items-center gap-2 overflow-hidden" aria-label="MAXLABS home">
             <MaxlabsBrandLockup priority logoContrastBackdrop />
           </Link>
 

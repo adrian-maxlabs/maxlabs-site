@@ -12,7 +12,7 @@ export function ValuesMarqueeSection() {
       aria-labelledby="values-heading"
     >
       <div
-        className="values-marquee relative overflow-hidden border-b border-[var(--border)] bg-[var(--surface)] py-8 sm:py-10"
+        className="values-marquee relative overflow-x-clip border-b border-[var(--border)] bg-[var(--surface)] py-8 sm:py-10"
         aria-label={MARQUEE_TEXT}
       >
         <LandingDotField />

@@ -25,8 +25,8 @@ export default function ContactPage() {
   return (
     <div className="flex min-h-screen flex-col bg-[var(--background)] font-sans">
       <header className="border-b border-[var(--border)] bg-[var(--background)]/95 backdrop-blur-sm">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6 lg:px-10">
-          <Link href="/" aria-label="Back to MAXLABS home" className="flex min-w-0 items-center gap-2">
+        <div className="mx-auto flex h-14 w-full min-w-0 max-w-6xl items-center justify-between gap-2 overflow-hidden px-4 sm:h-16 sm:gap-3 sm:px-6 lg:px-10">
+          <Link href="/" aria-label="Back to MAXLABS home" className="flex min-w-0 items-center gap-2 overflow-hidden">
             <MaxlabsBrandLockup priority logoContrastBackdrop />
           </Link>
           <div className="flex items-center gap-3">

@@ -7,7 +7,7 @@ export interface MaxlabsWordmarkProps {
 
 export function MaxlabsWordmark({ className, textClassName }: MaxlabsWordmarkProps) {
   return (
-    <span className={cn("inline-flex flex-col leading-none", className)}>
+    <span className={cn("inline-flex min-w-0 flex-col leading-none", className)}>
       <span
         className={cn(
           "inline-flex items-baseline font-bold tracking-tight text-[var(--foreground)]",
@@ -17,7 +17,7 @@ export function MaxlabsWordmark({ className, textClassName }: MaxlabsWordmarkPro
         <span>MAX</span>
         <span>LABS</span>
       </span>
-      <span className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--foreground)]/75 sm:text-[10px]">
+      <span className="mt-0.5 hidden text-[9px] font-semibold uppercase tracking-[0.14em] text-[var(--foreground)]/75 min-[380px]:inline sm:text-[10px] sm:tracking-[0.18em]">
         I.T SOLUTIONS
       </span>
     </span>

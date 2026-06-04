@@ -14,7 +14,7 @@ export function MaxlabsBrandLockup({
   className,
   logoMaxHeight = 34,
   priority = false,
-  textClassName = "text-lg sm:text-xl",
+  textClassName = "text-base sm:text-lg md:text-xl",
   logoContrastBackdrop = false,
 }: MaxlabsBrandLockupProps) {
   return (

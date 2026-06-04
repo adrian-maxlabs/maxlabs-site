@@ -39,7 +39,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${plusJakarta.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${plusJakarta.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full overflow-x-clip antialiased`}
     >
       <head>
         <ThemeScript />

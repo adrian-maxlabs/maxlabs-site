@@ -162,7 +162,7 @@ function MobileMenu() {
 
 export function LandingNavMenu({ className }: { className?: string }) {
   return (
-    <div className={cn("flex items-center justify-end lg:justify-center", className)}>
+    <div className={cn("flex shrink-0 items-center justify-end lg:justify-center", className)}>
       <DesktopMenu />
       <MobileMenu />
     </div>
