@@ -98,7 +98,7 @@ function StepProgressRail({
             <li key={step} className="relative py-3 first:pt-0 last:pb-0">
               <span
                 className={cn(
-                  "absolute -start-[calc(0.5rem+1px)] top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-[var(--background)] transition-colors",
+                  "absolute -start-[calc(0.5rem+1px)] top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-[var(--background)] transition-colors duration-300",
                   isActive && "border-[var(--primary)] bg-[var(--primary)]",
                   isComplete && "border-emerald-500 bg-emerald-500",
                   !isActive && !isComplete && "border-[var(--border)]",
@@ -109,7 +109,7 @@ function StepProgressRail({
                 type="button"
                 onClick={() => onStepClick(step)}
                 className={cn(
-                  "text-left text-sm transition-colors",
+                  "text-left text-sm transition-colors duration-300",
                   isActive
                     ? "font-semibold text-[var(--primary)]"
                     : isComplete
@@ -176,12 +176,16 @@ export function DeliveryProcessSection() {
   const stepRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
-    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReducedMotion(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
   }, []);
 
   useEffect(() => {
     const elements = stepRefs.current.filter(Boolean) as HTMLElement[];
-    if (!elements.length) return;
+    if (elements.length !== DELIVERY_STEPS.length) return;
 
     if (reducedMotion) {
       setActiveStep(1);
@@ -271,6 +275,7 @@ export function DeliveryProcessSection() {
                   ref={(node) => {
                     stepRefs.current[index] = node;
                   }}
+                  data-delivery-step={step.step}
                   className={cn(
                     "delivery-process-step relative mb-16 flex min-h-[88vh] scroll-mt-[6.5rem] items-start gap-8 last:mb-0 max-lg:flex-col sm:gap-10 lg:mb-24 lg:gap-16",
                     reverse ? "lg:flex-row-reverse" : "lg:flex-row",
@@ -288,13 +293,20 @@ export function DeliveryProcessSection() {
                     <StepContent step={step} isActive={activeStep === step.step} />
                   </div>
 
+                  {/* Stretch to full step height so sticky mock has room to pin while scrolling copy */}
                   <div
                     className={cn(
-                      "mx-auto w-full max-w-md lg:sticky lg:top-32 lg:mx-0 lg:mt-16 lg:w-auto lg:self-start",
-                      reverse ? "lg:mt-20" : "lg:mt-28",
+                      "mx-auto w-full max-w-md lg:mx-0 lg:w-auto lg:shrink-0 lg:self-stretch",
                     )}
                   >
-                    <Mock />
+                    <div
+                      className={cn(
+                        "delivery-process-mock mx-auto w-full max-w-md lg:sticky lg:top-32 lg:mx-0 lg:mt-16 lg:w-auto lg:self-start",
+                        reverse ? "lg:mt-20" : "lg:mt-28",
+                      )}
+                    >
+                      <Mock />
+                    </div>
                   </div>
                 </article>
               );

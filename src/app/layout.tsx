@@ -44,7 +44,7 @@ export default function RootLayout({
       <head>
         <ThemeScript />
       </head>
-      <body className="flex min-h-dvh flex-col overflow-x-hidden bg-[var(--background)] text-[var(--foreground)] antialiased">
+      <body className="flex min-h-dvh flex-col overflow-x-clip bg-[var(--background)] text-[var(--foreground)] antialiased">
         <ThemeSafelist />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
