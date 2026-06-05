@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  supabase:
+  image: supabase/supabase:edge
+  environment:
+      - SUPABASE_AUTH_LOGOUT_URL=https://your-nextjs-app.com
+      - SUPABASE_ANON_PUBLIC_ROLE=anon
+      - SUPABASE_STORAGE_BUCKET=public
+      - SUPABASE_AUTH_JWT_SECRET=your-jwt-secret
+      - SUPABASE_AUTH_JWT_PUBLIC_KEY=your-jwt-public-key
+      - SUPABASE_AUTH_JWT_PRIVATE_KEY=your-jwt-private-key
+  ports:
+    - "8080:8080" # Default port for Supabase API
+    - "3000:3000" # Port for Supabase storage (optional)
+  volumes:
+    - supabase_data:/var/lib/postgresql/data
+    - supabase_config:/etc/supabase
+  restart: unless-stopped
+
+volumes:
+  supabase_data:
+  supabase_config:
