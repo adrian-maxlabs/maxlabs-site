@@ -15,6 +15,7 @@ import { AboutSection } from "./about-section";
 import { ProjectsSection } from "./projects-section";
 import { ValuesMarqueeSection } from "./values-marquee-section";
 import { LandingDotField } from "./landing-dot-field";
+import { CtaSection } from "./cta-section";
 
 export const metadata: Metadata = {
   title: "MAXLABS I.T SOLUTIONS",
@@ -186,7 +187,7 @@ export default function LandingPage() {
 
         <DeliveryProcessSection />
 
-        <section className="relative overflow-hidden border-t border-[var(--border)] bg-[var(--background)]">
+        {/* <section className="relative overflow-hidden border-t border-[var(--border)] bg-[var(--background)]">
           <LandingDotField />
 
           <div className="relative z-10 mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-10">
@@ -202,7 +203,9 @@ export default function LandingPage() {
             <CircleExpandButton href="/contact">Talk to MAXLABS</CircleExpandButton>
             </div>
           </div>
-        </section>
+        </section> */}
+
+        <CtaSection />
       </main>
 
       <SiteFooter />
